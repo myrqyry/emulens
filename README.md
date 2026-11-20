@@ -9,6 +9,71 @@ graphics pipeline.
 
 **Compatibility:** EmuLens is the public project and OBS display name. The internal OBS source ID emulens_fx, binary name emuLensFX, shader resource paths, and installer layout intentionally retain their original names so saved scenes and installations remain compatible. Do not rename the plugin binary or installation directory manually.
 
+## Showcase
+
+<table>
+  <tr>
+    <th>Original</th>
+    <th>Vidicon</th>
+    <th>Starburst</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/showcase/original.webp" alt="Original" width="300"></td>
+    <td align="center"><img src="assets/showcase/vidicon.webp" alt="Vidicon" width="300"></td>
+    <td align="center"><img src="assets/showcase/starburst.webp" alt="Starburst" width="300"></td>
+  </tr>
+  <tr>
+    <th>Light Leak</th>
+    <th>Handheld</th>
+    <th>Bokeh</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/showcase/light-leak.webp" alt="Light Leak" width="300"></td>
+    <td align="center"><img src="assets/showcase/handheld.webp" alt="Handheld" width="300"></td>
+    <td align="center"><img src="assets/showcase/bokeh.webp" alt="Bokeh" width="300"></td>
+  </tr>
+  <tr>
+    <th>Particles</th>
+    <th>Orton Glow</th>
+    <th>Film Grit</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/showcase/particles.webp" alt="Particles" width="300"></td>
+    <td align="center"><img src="assets/showcase/orton.webp" alt="Orton Glow" width="300"></td>
+    <td align="center"><img src="assets/showcase/film-grit.webp" alt="Film Grit" width="300"></td>
+  </tr>
+  <tr>
+    <th>Mirage</th>
+    <th>Center Spot</th>
+    <th>Bloom</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/showcase/mirage.webp" alt="Mirage" width="300"></td>
+    <td align="center"><img src="assets/showcase/center-spot.webp" alt="Center Spot" width="300"></td>
+    <td align="center"><img src="assets/showcase/bloom.webp" alt="Bloom" width="300"></td>
+  </tr>
+  <tr>
+    <th>Pinhole</th>
+    <th>Polaroid</th>
+    <th>Daguerreotype</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/showcase/pinhole.webp" alt="Pinhole" width="300"></td>
+    <td align="center"><img src="assets/showcase/polaroid.webp" alt="Polaroid" width="300"></td>
+    <td align="center"><img src="assets/showcase/daguerreotype.webp" alt="Daguerreotype" width="300"></td>
+  </tr>
+  <tr>
+    <th>Technicolor 2-Strip</th>
+    <th>Wet Lens</th>
+    <th>Phone Wet Lens</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="assets/showcase/technicolor.webp" alt="Technicolor 2-Strip" width="300"></td>
+    <td align="center"><img src="assets/showcase/wet-lens.webp" alt="Wet Lens" width="300"></td>
+    <td align="center"><img src="assets/showcase/phone-wet-lens.webp" alt="Phone Wet Lens" width="300"></td>
+  </tr>
+</table>
+
 ## Features
 
 - **17 effect modes** — Vidicon, Starburst, Light Leak, Handheld, Bokeh, Particles,
