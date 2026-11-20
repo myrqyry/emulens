@@ -7,7 +7,7 @@ graphics pipeline.
 
 **Public preview source — v0.5.0 (experimental).** All 17 effects, including Wet Lens and Phone Wet Lens, are in this snapshot. Linux has passed isolated OBS/OpenGL tests. Windows and macOS compile/package success does not yet establish that the plugin loads and renders correctly on those platforms. See [CHANGELOG.md](CHANGELOG.md) and [release testing boundaries](docs/RELEASE_CHECKLIST.md).
 
-**Compatibility:** EmuLens is the public project and OBS display name. The internal OBS source ID emulens_fx, binary name emuLensFX, shader resource paths, and installer layout intentionally retain their original names so saved scenes and installations remain compatible. Do not rename the plugin binary or installation directory manually.
+Existing OBS scenes and installations remain compatible with EmuLens: the internal plugin identifier and installation paths are unchanged.
 
 ## Showcase
 
