@@ -19,12 +19,17 @@ def main():
     assert .009 <= part["part_size"] <= .018 and 8 <= part["part_density"] <= 18
     phone = load("phone_wet")
     assert 1.0 <= phone["phone_ribbons"] <= 1.45 and phone["phone_glow"] <= .45
-    assert .55 <= load("orton")["orton_opacity"] <= .75
+    orton = load("orton")
+    assert .5 <= orton["orton_opacity"] <= .65
+    assert orton["orton_saturation"] > 1.0 and orton["orton_contrast"] < 1.0
+    assert 5 <= orton["orton_spread"] <= 12
+    assert orton["orton_blend_mode"] == 2
     assert 0.5 <= load("mirage")["mir_rot_speed"] <= 3.0
     grit = load("grit")
-    assert 0 <= grit["grit_blend_mode"] <= 5
-    assert .12 <= grit["grit_noise"] <= .3
-    assert .2 <= grit["grit_scratches"] <= .5
+    assert grit["grit_blend_mode"] == 4
+    assert .85 <= grit["grit_opacity"] <= 1.0
+    assert .4 <= grit["grit_noise"] <= .7
+    assert .4 <= grit["grit_scratches"] <= .8
     print("PASS: visible default starter settings remain bounded")
 if __name__ == "__main__":
     main()

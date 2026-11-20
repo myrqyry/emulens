@@ -51,7 +51,7 @@ def main() -> int:
     require(bloom["bloom_ghost_amount"] == 0.0, "default Bloom must not add lens ghosts", failures)
 
     grit = load("default_grit.json")
-    require(grit["grit_opacity"] <= 0.40, "default Grit opacity is too high", failures)
+    require(0.0 <= grit["grit_opacity"] <= 1.0, "default Grit opacity outside its control range", failures)
     require(grit["grit_instability"] <= 0.20, "default Grit gate weave is too strong", failures)
 
     pinhole = load("default_pinhole.json")

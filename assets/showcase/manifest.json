@@ -30,7 +30,7 @@
       "name": "Light Leak",
       "file": "light-leak.webp",
       "preset": "runtime-default:2",
-      "sha256": "9e7e9f389aa05ed9b96cc2a21d95c0e3bf2c9a833f8948f4aa8289f1938f27c4"
+      "sha256": "4504b3178e8c53f33dc31a645007e313da28b071e3d9094cd73629aaa1ad9939"
     },
     {
       "name": "Handheld",
@@ -54,13 +54,13 @@
       "name": "Orton Glow",
       "file": "orton.webp",
       "preset": "runtime-default:6",
-      "sha256": "f4fe95b28d01dc3441fd9855d3da063b6d5c126d31264a1f63de2e19f96624fd"
+      "sha256": "5aaa5d68bb3f399d173d860aeb28128b9c988afa09b1a35ff79ddcd13ae402b8"
     },
     {
       "name": "Film Grit",
       "file": "film-grit.webp",
       "preset": "runtime-default:7",
-      "sha256": "c5e2bff151d2210f52af53987aa63620caa7e282b00411ff0a893dfe92c2011c"
+      "sha256": "50ee65e683b2d1e108faedb4d1bbb05f5efc0258955d678cdabf72ea722b9704"
     },
     {
       "name": "Mirage",
