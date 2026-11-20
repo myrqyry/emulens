@@ -1,4 +1,4 @@
-// GPL-2.0. Capture the EmuLens OBS filter on a supplied raw RGBA clip.
+// GPL-2.0. Capture the emulens OBS filter on a supplied raw RGBA clip.
 // This process owns a separate libobs context; never opens the user's scenes.
 #include <obs.h>
 #include <graphics/graphics.h>
@@ -102,7 +102,7 @@ int main(int argc,char **argv) {
             obs_data_set_int(settings,"mode",mode);
         }
         if(!settings || !obs_data_has_user_value(settings,"mode"))return 7;
-        filter=obs_source_create("emulens_fx","EmuLens showcase",settings,nullptr);
+        filter=obs_source_create("emulens","emulens showcase",settings,nullptr);
         if(!filter)return 6;
         auto *actual=obs_source_get_settings(filter);
         if(obs_data_get_int(actual,"mode")!=obs_data_get_int(settings,"mode"))return 7;

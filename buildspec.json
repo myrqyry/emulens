@@ -1,11 +1,11 @@
 {
-  "name": "emuLensFX",
-  "displayName": "EmuLens",
+  "name": "emulens",
+  "displayName": "emulens",
   "version": "0.5.0",
   "author": "myrqyry",
   "email": "99147786+myrqyry@users.noreply.github.com",
   "website": "https://github.com/myrqyry/emuLens",
-  "description": "Experimental OBS Studio GPU filter with 17 camera, lens and film effects. Retains emuLensFX binary and resource names for compatibility",
+  "description": "GPU-accelerated camera, lens and film effects for OBS Studio",
   "dependencies": {
     "obs-studio": {
       "version": "32.1.0",
@@ -41,7 +41,7 @@
   },
   "platformConfig": {
     "macos": {
-      "bundleId": "com.myrqyry.emuLensFX"
+      "bundleId": "com.myrqyry.emulens"
     }
   }
 }

@@ -4,7 +4,7 @@ set -euo pipefail
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 obs_version="33.0.1"
 obs_sha256="9174ee0e3677c92d0d060bdce4c5d44dfee9fd3afddfb6333f098fd029b8de2b"
-work="${RUNNER_TEMP:-/tmp}/emuLensFX-obs33"
+work="${RUNNER_TEMP:-/tmp}/emulens-obs33"
 obs_archive="$work/obs-studio-$obs_version.tar.gz"
 obs_source="$work/obs-studio-$obs_version"
 obs_build="$work/obs-build"
@@ -36,10 +36,10 @@ cmake -S "$repo" -B "$plugin_build" -G Ninja \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DCMAKE_COMPILE_WARNING_AS_ERROR=ON \
   -Dlibobs_DIR="$obs_sdk/lib/cmake/libobs" \
-  -DEMULENS_BUILD_OBS_FROM_SOURCE=OFF \
+  -Demulens_BUILD_OBS_FROM_SOURCE=OFF \
   -DENABLE_FRONTEND_API=OFF \
   -DENABLE_QT=OFF
 
-cmake --build "$plugin_build" --target emuLensFX --parallel
-test -s "$(find "$plugin_build" -type f \( -name 'emuLensFX.so' -o -name 'libemuLensFX.so' \) -print -quit)"
-echo "PASS: emuLensFX builds against OBS $obs_version"
+cmake --build "$plugin_build" --target emulens --parallel
+test -s "$(find "$plugin_build" -type f \( -name 'emulens.so' -o -name 'libemulens.so' \) -print -quit)"
+echo "PASS: emulens builds against OBS $obs_version"

@@ -3,16 +3,16 @@
 
 ## Purpose
 
-EmuLens is an OBS Studio source filter providing GPU-accelerated lens, optical,
+emulens is an OBS Studio source filter providing GPU-accelerated lens, optical,
 camera-motion, and film-emulation effects within OBS's graphics pipeline. Its
 distinctive premise is optics-first behavior that ranges from restrained lens
 imperfections to intentionally stylized analog looks.
 
 ## Invariants
 
-- Preserve the internal OBS source ID `emulens_fx`, binary name `emuLensFX`,
+- Preserve the internal OBS source ID `emulens`, binary name `emulens`,
   shader resource paths, and installer layout for saved-scene and installation
-  compatibility; the public/display name is EmuLens.
+  compatibility; the public/display name is emulens.
 - OBS 32.1.0 or newer is required; a module built against a newer libobs SDK may
   not load on an older OBS installation.
 - Each effect's `default_<mode>.json` preset is expected to match its runtime
@@ -36,7 +36,7 @@ imperfections to intentionally stylized analog looks.
 See `README.md` for installation and `docs/RELEASE_CHECKLIST.md` for the
 bounded release-verification commands. The documented local checks include:
 
-- `EMULENS_TEST_BUILD_DIR=/tmp/emulensfx-check ./tests/run_tests.sh`
+- `EMULENS_TEST_BUILD_DIR=/tmp/emulens-check ./tests/run_tests.sh`
 - `python3 -m unittest discover -s tests -p test_safe_installer.py -v`
 - CMake configure/build/install and `package_source` checks (see release
   checklist for exact commands).

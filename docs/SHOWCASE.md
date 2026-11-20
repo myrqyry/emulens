@@ -1,10 +1,10 @@
 # Capture an effect showcase
 The Linux-only development utility renders a short GIF or video through real
-EmuLens filter instances in a separate libobs process. It does not open or edit
+emulens filter instances in a separate libobs process. It does not open or edit
 the normal OBS scene collection. Build using a configured native OBS SDK first.
 
     cmake -S . -B build
-    cmake --build build --target emuLensFX
+    cmake --build build --target emulens
     python3 tools/capture-showcase.py input.gif output-previews
 
 The output directory must be new. Output includes a clean reference, one

@@ -35,7 +35,7 @@ assert "--component Runtime" in bootstrap, "CI SDK must install OBS runtime libr
 assert "-DCMAKE_INSTALL_PREFIX=${dependencies_dir}" in bootstrap, "libobs must resolve data from the pinned SDK prefix"
 
 builder = (root / ".github/scripts/build-ubuntu").read_text()
-assert "-DEMULENS_BUILD_OBS_FROM_SOURCE=ON" in builder
+assert "-Demulens_BUILD_OBS_FROM_SOURCE=ON" in builder
 
 setup = (root / ".github/scripts/utils.zsh/setup_ubuntu").read_text()
 for package in (

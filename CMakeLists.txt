@@ -47,7 +47,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE PLUGIN_VERSION="${PROJE
 
 find_package(libobs CONFIG REQUIRED)
 if(NOT DEFINED libobs_VERSION OR libobs_VERSION VERSION_LESS "32.1.0")
-    message(FATAL_ERROR "emuLensFX requires libobs 32.1.0 or newer; found ${libobs_VERSION}")
+    message(FATAL_ERROR "emulens requires libobs 32.1.0 or newer; found ${libobs_VERSION}")
 endif()
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE OBS::libobs)
 
@@ -104,7 +104,7 @@ target_sources(
     PRIVATE ${CORE_SOURCES} ${STRATEGY_SOURCES}
 )
 
-set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME "emuLensFX")
+set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME "emulens")
 
 if(ENABLE_TESTING)
     message(STATUS "Tests enabled - configuring test project")

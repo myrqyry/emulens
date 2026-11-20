@@ -73,7 +73,7 @@ bool get_input_source(struct lens_data *filter, uint32_t width,
    * Custom-draw, async, and upstream-filter targets go through
    * obs_source_video_render().  While a source's filter callback is active,
    * libobs marks the parent as rendering_filter, so this bypasses the current
-   * filter rather than recursing back into EmuLens.
+   * filter rather than recursing back into emulens.
    */
   const uint32_t parent_flags = obs_source_get_output_flags(parent);
   const bool parent_custom_draw =

@@ -6,10 +6,10 @@ param(
 $ErrorActionPreference = "Stop"
 
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "  Building EmuLens for Windows (emuLensFX module)" -ForegroundColor Cyan
+Write-Host "  Building emulens for Windows (emulens module)" -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 
-$InstallPrefix = Join-Path $env:APPDATA "obs-studio\plugins\emuLensFX"
+$InstallPrefix = Join-Path $env:APPDATA "obs-studio\plugins\emulens"
 Write-Host "Install prefix: $InstallPrefix" -ForegroundColor Green
 
 if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Render pipeline invariant tests for emuLensFX.
+Render pipeline invariant tests for emulens.
 
 Verifies lens_render() in lens-core.c contains required safety guards,
 fallback paths, and dispatch patterns.
@@ -143,7 +143,7 @@ def check():
 
     # 14. Final composite must present the completed strategy texture through
     # OBS's own base Draw effect. Re-running the finished texture through the
-    # EmuLens effect can accidentally apply stale uniforms or custom state.
+    # emulens effect can accidentally apply stale uniforms or custom state.
     base_composite = re.search(
         r'composite_tex\s*=\s*final_tex\s*\?\s*final_tex\s*:\s*source_tex;'
         r'.*?obs_get_base_effect\(OBS_EFFECT_DEFAULT\)'
@@ -194,7 +194,7 @@ def check():
 
 def main():
     print("=" * 60)
-    print("emuLensFX Render Pipeline Invariant Test")
+    print("emulens Render Pipeline Invariant Test")
     print("=" * 60)
     check()
     print("-" * 60)

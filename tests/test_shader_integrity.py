@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Shader Structural Integrity Test for EmuLensFX
+Shader Structural Integrity Test for emulens
 
 Validates the effect file has:
 1. No duplicate function definitions

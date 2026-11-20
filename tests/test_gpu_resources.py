@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GPU resource lifecycle tests for emuLensFX.
+GPU resource lifecycle tests for emulens.
 
 Verifies texrender creation/destruction patterns and resize logic.
 """
@@ -102,7 +102,7 @@ def check():
 
 def main():
     print("=" * 60)
-    print("emuLensFX GPU Resource Lifecycle Test")
+    print("emulens GPU Resource Lifecycle Test")
     print("=" * 60)
     check()
     print("-" * 60)

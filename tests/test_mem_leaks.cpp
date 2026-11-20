@@ -88,17 +88,17 @@ void test_lifecycle() {
     RegisterMyPluginSources();
     printf("Source Registered.\n");
     // Public name changes, while the persistent OBS source type ID does not.
-    const char *display = obs_source_get_display_name("emulens_fx");
-    if (!display || strcmp(display, "EmuLens") != 0) {
-        fprintf(stderr, "Expected EmuLens display on stable emulens_fx type, got %s\n",
+    const char *display = obs_source_get_display_name("emulens");
+    if (!display || strcmp(display, "emulens") != 0) {
+        fprintf(stderr, "Expected emulens display on emulens type, got %s\n",
                 display ? display : "(missing)");
         obs_shutdown();
         exit(2);
     }
-    printf("PUBLIC_BRANDING=EmuLens ID=emulens_fx\n");
+    printf("PUBLIC_BRANDING=emulens ID=emulens\n");
 
     // 3. Create and Destroy your object
-    obs_source_t *source = obs_source_create("emulens_fx", "Test Source", NULL, NULL);
+    obs_source_t *source = obs_source_create("emulens", "Test Source", NULL, NULL);
     if (source == NULL) {
         fprintf(stderr, "Failed to create source!\n");
         // Ensure we shut down even if we fail

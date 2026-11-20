@@ -41,7 +41,7 @@ def test_source_creation(plugin_path=None):
         )
 
     # 3. Create the source
-    source_id = "emulens_fx"  # This MUST match the .id in lens-core.c
+    source_id = "emulens"  # This MUST match the .id in lens-core.c
     source = obs.obs_source_create(source_id, "Test Source", None, None)
 
     if not source:

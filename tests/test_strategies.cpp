@@ -1,6 +1,6 @@
 /**
  * @file test_strategies.cpp
- * @brief Unit tests for EmuLensFX effect strategies
+ * @brief Unit tests for emulens effect strategies
  *
  * Tests that all strategy functions are properly defined and the
  * global strategies[] vtable is correctly populated.
@@ -141,7 +141,7 @@ int test_mode_constants() {
 
 int main() {
     printf("============================================================\n");
-    printf("EmuLensFX Strategy Unit Tests\n");
+    printf("emulens Strategy Unit Tests\n");
     printf("============================================================\n");
 
     int total_failures = 0;

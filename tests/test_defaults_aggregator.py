@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Defaults aggregator test for emuLensFX.
+Defaults aggregator test for emulens.
 
 Verifies emulens_get_defaults sets required defaults and delegates
 to all strategy get_defaults functions.
@@ -88,7 +88,7 @@ def check():
 
 def main():
     print("=" * 60)
-    print("emuLensFX Defaults Aggregator Test")
+    print("emulens Defaults Aggregator Test")
     print("=" * 60)
     check()
     print("-" * 60)

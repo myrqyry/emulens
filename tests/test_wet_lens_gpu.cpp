@@ -168,12 +168,12 @@ int main(int argc,char** argv) {
     obs_module_t* module=nullptr;
     const int opened=obs_open_module(&module,argv[2],argv[3]);
     if(opened!=MODULE_SUCCESS || !module || !obs_init_module(module)) {
-        std::cerr<<"FAIL: staged EmuLensFX module did not initialize: "
+        std::cerr<<"FAIL: staged emulens module did not initialize: "
                  <<opened<<"\n";
         obs_shutdown();
         return 1;
     }
-    auto *props=obs_get_source_properties("emulens_fx");
+    auto *props=obs_get_source_properties("emulens");
     auto *mode=props?obs_properties_get(props,"mode"):nullptr;
     auto *group=props?obs_properties_get(props,"group_wet_lens"):nullptr;
     auto *coverage=props?obs_properties_get(props,"wet_density"):nullptr;

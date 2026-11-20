@@ -134,12 +134,19 @@ int main(int argc,char** argv) {
     obs_module_t* module=nullptr;
     const int opened=obs_open_module(&module,argv[2],argv[3]);
     if(opened!=MODULE_SUCCESS || !module || !obs_init_module(module)) {
-        std::cerr<<"FAIL: staged EmuLensFX module did not initialize: "
+        std::cerr<<"FAIL: staged emulens module did not initialize: "
                  <<opened<<"\n";
         obs_shutdown();
         return 1;
     }
-    auto *props=obs_get_source_properties("emulens_fx");
+    const char *display = obs_source_get_display_name("emulens");
+    if (!display || std::string(display) != "emulens" ||
+        obs_get_source_output_flags("emulens") == 0) {
+        std::cerr << "FAIL: registered filter must use emulens for both ID and display name\n";
+        obs_shutdown();
+        return 1;
+    }
+    auto *props=obs_get_source_properties("emulens");
     auto *mode=props?obs_properties_get(props,"mode"):nullptr;
     auto *group=props?obs_properties_get(props,"group_phone_wet"):nullptr;
     auto *coverage_property=props?obs_properties_get(props,"phone_coverage"):nullptr;

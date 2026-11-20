@@ -21,8 +21,8 @@
 //  Enhanced Logging Helpers  (shared across all translation units)
 // ──────────────────────────────────────────────────────────────────────────────
 
-/* Log prefix used by all emuLensFX log lines */
-#define LOG_TAG "[EmuLensFX]"
+/* Log prefix used by all emulens log lines */
+#define LOG_TAG "[emulens]"
 
 /* Shortcut: blog with our tag */
 #define EMULENS_LOG(level, fmt, ...)                                           \

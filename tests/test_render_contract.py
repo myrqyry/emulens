@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Render-contract and locale validation tests for emuLensFX.
+Render-contract and locale validation tests for emulens.
 
 Verifies:
 1. Every obs_module_text("Key") in C has a matching key in en-US.ini.
@@ -470,7 +470,7 @@ def check_bloom_dust_path():
 # ----------------------------------------------------------------
 def main():
     print("=" * 60)
-    print("emuLensFX Render-Contract Validation")
+    print("emulens Render-Contract Validation")
     print("=" * 60)
 
     check_locale_keys()

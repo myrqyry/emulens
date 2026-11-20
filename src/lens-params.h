@@ -378,7 +378,7 @@ static inline void emulens_color_to_vec4(struct vec4 *out, uint32_t rgba_le) {
       gs_effect_get_param_info(param, &info);                                  \
       if (info.type == GS_SHADER_PARAM_UNKNOWN) {                              \
         blog(LOG_WARNING,                                                       \
-             "[EmuLensFX] Skip '%s': param type UNKNOWN (stale handle — "       \
+             "[emulens] Skip '%s': param type UNKNOWN (stale handle — "       \
              "possible shader recompile?)",                                     \
              info.name ? info.name : "?");                                     \
         break;                                                                 \
@@ -389,7 +389,7 @@ static inline void emulens_color_to_vec4(struct vec4 *out, uint32_t rgba_le) {
       if ((expected_size == 0) !=                                             \
           (info.type == GS_SHADER_PARAM_TEXTURE)) {                            \
         blog(LOG_ERROR,                                                        \
-             "[EmuLensFX] Type Mismatch: Passing %s to parameter '%s' (type=%d)", \
+             "[emulens] Type Mismatch: Passing %s to parameter '%s' (type=%d)", \
              type_name, info.name ? info.name : "?", (int)info.type);          \
         break;                                                                 \
       } else if (info.type != GS_SHADER_PARAM_TEXTURE && actual_size == 0) {   \
@@ -397,7 +397,7 @@ static inline void emulens_color_to_vec4(struct vec4 *out, uint32_t rgba_le) {
         break;                                                                 \
       } else if (expected_size > 0 && actual_size != expected_size) {          \
         blog(LOG_ERROR,                                                        \
-             "[EmuLensFX] Type Mismatch: Passing %s to parameter '%s' "        \
+             "[emulens] Type Mismatch: Passing %s to parameter '%s' "        \
              "with size %zu (expected %d)",                                    \
              type_name, info.name ? info.name : "?", actual_size,              \
              expected_size);                                                    \
@@ -406,7 +406,7 @@ static inline void emulens_color_to_vec4(struct vec4 *out, uint32_t rgba_le) {
       setter(param, val);                                                      \
     } else {                                                                   \
       blog(LOG_DEBUG,                                                          \
-           "[EmuLensFX] SET skipped: %s handle is NULL (param absent in shader)", \
+           "[emulens] SET skipped: %s handle is NULL (param absent in shader)", \
            type_name);                                                         \
     }                                                                          \
   } while (0)
@@ -426,7 +426,7 @@ static inline void emulens_color_to_vec4(struct vec4 *out, uint32_t rgba_le) {
       gs_effect_get_param_info(param, &info);                                  \
       if (info.type == GS_SHADER_PARAM_UNKNOWN) {                              \
         blog(LOG_WARNING,                                                       \
-             "[EmuLensFX] Skip '%s': param type UNKNOWN (stale handle)",       \
+             "[emulens] Skip '%s': param type UNKNOWN (stale handle)",       \
              info.name ? info.name : "?");                                     \
         break;                                                                 \
       }                                                                        \
@@ -436,13 +436,13 @@ static inline void emulens_color_to_vec4(struct vec4 *out, uint32_t rgba_le) {
         gs_effect_set_bool(param, val);                                        \
       } else {                                                                 \
         blog(LOG_ERROR,                                                         \
-             "[EmuLensFX] Type Mismatch: Passing BOOL to parameter '%s' (type=%d)", \
+             "[emulens] Type Mismatch: Passing BOOL to parameter '%s' (type=%d)", \
              info.name ? info.name : "?", (int)info.type);                     \
         break;                                                                 \
       }                                                                        \
     } else {                                                                   \
       blog(LOG_DEBUG,                                                          \
-           "[EmuLensFX] SET skipped: BOOL handle is NULL (param absent in shader)"); \
+           "[emulens] SET skipped: BOOL handle is NULL (param absent in shader)"); \
     }                                                                          \
   } while (0)
 #define SET_PARAM_VEC2(param, val)                                             \

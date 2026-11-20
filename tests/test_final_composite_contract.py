@@ -18,7 +18,7 @@ for token in (
     if token not in body:
         errors.append(f"missing {token}")
 if "filter->tech.draw" in body:
-    errors.append("custom EmuLens Draw technique reused for final composite")
+    errors.append("custom emulens Draw technique reused for final composite")
 if errors:
     for e in errors: print("FAIL:", e)
     sys.exit(1)

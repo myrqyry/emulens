@@ -1,12 +1,12 @@
 #!/bin/bash
-# EmuLens Installation Verification Script
+# emulens Installation Verification Script
 # Run this after installation to verify the plugin is properly installed
 
-echo "🔍 EmuLens Installation Verification"
+echo "🔍 emulens Installation Verification"
 echo "======================================"
 
-PLUGIN_DIR="$HOME/.config/obs-studio/plugins/emuLensFX"
-PLUGIN_BINARY="$PLUGIN_DIR/bin/64bit/emuLensFX.so"
+PLUGIN_DIR="$HOME/.config/obs-studio/plugins/emulens"
+PLUGIN_BINARY="$PLUGIN_DIR/bin/64bit/emulens.so"
 SHADER_FILE="$PLUGIN_DIR/data/emulens.effect"
 
 echo "Checking plugin directory: $PLUGIN_DIR"
@@ -56,11 +56,11 @@ fi
 echo ""
 echo "🎉 Installation verification complete!"
 echo ""
-echo "To use EmuLens in OBS Studio:"
+echo "To use emulens in OBS Studio:"
 echo "1. Launch OBS Studio"
 echo "2. Add a video source (Media Source, Video Capture Device, etc.)"
 echo "3. Right-click the source → Filters"
-echo "4. Click '+' → EmuLens"
+echo "4. Click '+' → emulens"
 echo "5. Select your desired effect mode and adjust parameters"
 echo ""
 echo "For more information, see: https://github.com/myrqyry/emuLens"

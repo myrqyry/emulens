@@ -2,10 +2,10 @@
 set -euo pipefail
 
 BUILD_TYPE="${BUILD_TYPE:-Release}"
-INSTALL_PREFIX="$HOME/Library/Application Support/obs-studio/plugins/emuLensFX"
+INSTALL_PREFIX="$HOME/Library/Application Support/obs-studio/plugins/emulens"
 
 echo "================================================"
-echo "  Building EmuLens for macOS (emuLensFX module)"
+echo "  Building emulens for macOS (emulens module)"
 echo "================================================"
 echo "Install prefix: $INSTALL_PREFIX"
 

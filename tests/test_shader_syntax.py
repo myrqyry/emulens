@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Shader Syntax Validation Test for EmuLensFX
+Shader Syntax Validation Test for emulens
 
 This test parses the effect file and validates:
 1. All required techniques exist
@@ -59,7 +59,7 @@ def find_functions(content: str) -> set:
 
 def main():
     print("=" * 60)
-    print("EmuLensFX Hardened Shader Validation Test")
+    print("emulens Hardened Shader Validation Test")
     print("=" * 60)
 
     effect_path = find_effect_file()

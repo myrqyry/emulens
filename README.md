@@ -1,13 +1,11 @@
-# EmuLens
+# emulens
 
 GPU-accelerated lens, optical, camera, and film-emulation effects for OBS Studio.
-Use EmuLens as a source filter to build everything from restrained optical
+Use emulens as a source filter to build everything from restrained optical
 imperfections to deliberately stylized analog looks without leaving the OBS
 graphics pipeline.
 
-**Public preview source — v0.5.0 (experimental).** All 17 effects, including Wet Lens and Phone Wet Lens, are in this snapshot. Linux has passed isolated OBS/OpenGL tests. Windows and macOS compile/package success does not yet establish that the plugin loads and renders correctly on those platforms. See [CHANGELOG.md](CHANGELOG.md) and [release testing boundaries](docs/RELEASE_CHECKLIST.md).
-
-Existing OBS scenes and installations remain compatible with EmuLens: the internal plugin identifier and installation paths are unchanged.
+**Public preview — v0.5.0.** All 17 effects, including Wet Lens and Phone Wet Lens, are in this snapshot. Linux has passed isolated OBS/OpenGL tests. Windows and macOS compile/package success does not yet establish that the plugin loads and renders correctly on those platforms. See [CHANGELOG.md](CHANGELOG.md) and [release testing boundaries](docs/RELEASE_CHECKLIST.md).
 
 ## Showcase
 
@@ -135,7 +133,7 @@ prints the PowerShell command to use instead of attempting a Unix install.
 Installs to:
 
 ```text
-~/.config/obs-studio/plugins/emuLensFX
+~/.config/obs-studio/plugins/emulens
 ```
 
 The installer supports explicit libobs CMake discovery overrides:
@@ -167,7 +165,7 @@ preset directory, and locale directory. For release candidates, verify the stage
 Installs to:
 
 ```text
-~/Library/Application Support/obs-studio/plugins/emuLensFX
+~/Library/Application Support/obs-studio/plugins/emulens
 ```
 
 Choose a CMake configuration through `BUILD_TYPE`:
@@ -195,7 +193,7 @@ The installer defaults to `Release`. Supported values are `Debug`,
 ```
 
 The user plugin is installed under
-`%APPDATA%\obs-studio\plugins\emuLensFX`.
+`%APPDATA%\obs-studio\plugins\emulens`.
 
 The installers choose the user-level paths shown above; a custom prefix
 is not needed for a default install. On Linux, `install_local.sh`
@@ -207,7 +205,7 @@ still needs runtime verification on those platforms. Restart OBS afterward.
 
 1. Add a video or image source to a scene.
 2. Right-click the source → **Filters**.
-3. Click **+** → **EmuLens**.
+3. Click **+** → **emulens**.
 4. Choose an **Effect Type**.
 5. Start from a preset or tune the visible controls directly.
 
@@ -329,7 +327,7 @@ The earlier public v0.5.0 snapshot passed 50 of 51 registered tests (one optiona
 
 ## Architecture
 
-EmuLens uses a strategy-per-effect architecture.
+emulens uses a strategy-per-effect architecture.
 
 - **Core rendering** (`src/lens-core.c`) — filter lifecycle, settings snapshots,
   shared GPU resources, render dispatch, dimensions, and final composite.
@@ -374,7 +372,7 @@ fixed-in-lens-space contamination.
 
 ## License
 
-EmuLens is licensed under the GNU General Public License version 2 or later
+emulens is licensed under the GNU General Public License version 2 or later
 (`GPL-2.0-or-later`), matching OBS Studio's licensing. See [LICENSE](LICENSE).
 
 ## Credits

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the real EmuLens OBS filter into labeled animated and still previews."""
+"""Render the real emulens OBS filter into labeled animated and still previews."""
 import argparse
 import hashlib
 import json
@@ -72,7 +72,7 @@ def main():
     p.add_argument("--display", action="store_true", help="use current X display for GPU acceleration instead of Xvfb")
     a = p.parse_args()
     source, output, build, data = (v.expanduser().resolve() for v in (a.input, a.output, a.build, a.data))
-    module = a.module.expanduser().resolve() if a.module else build / "emuLensFX.so"
+    module = a.module.expanduser().resolve() if a.module else build / "emulens.so"
     if not source.is_file() or not module.is_file() or not (data / "emulens.effect").is_file():
         p.error("input, module or shader not found")
     if output.exists():

@@ -3,7 +3,7 @@
 set -Eeuo pipefail
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_PREFIX="${EMULENS_INSTALL_PREFIX:-$HOME/.config/obs-studio/plugins/emuLensFX}"
+INSTALL_PREFIX="${EMULENS_INSTALL_PREFIX:-$HOME/.config/obs-studio/plugins/emulens}"
 BUILD_DIR="${EMULENS_BUILD_DIR:-$ROOT/build}"
 STAGING_ROOT="${TMPDIR:-/tmp}"
 STAGING_PREFIX=""
@@ -35,7 +35,7 @@ OBS_CMAKE_DIR="${OBS_CMAKE_DIR:-${libobs_DIR:-/usr/lib/$OBS_ARCH_DIR/cmake/libob
 
 # Stage first: a failed build or incomplete plugin never touches the existing install.
 mkdir -p "$STAGING_ROOT"
-STAGING_PREFIX="$(mktemp -d "$STAGING_ROOT/emulensfx-install.XXXXXX")"
+STAGING_PREFIX="$(mktemp -d "$STAGING_ROOT/emulens-install.XXXXXX")"
 cmake -S "$ROOT" -B "$BUILD_DIR" \
   -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" -Dlibobs_DIR="$OBS_CMAKE_DIR"
 cmake --build "$BUILD_DIR" --parallel "$(nproc)"
@@ -45,26 +45,26 @@ cmake --install "$BUILD_DIR" --prefix "$STAGING_PREFIX"
 # Resolve the staged module under obs-plugins rather than assuming one layout.
 module=""
 if [[ -d "$STAGING_PREFIX/lib" ]]; then
-  module="$(find "$STAGING_PREFIX/lib" -type f -path '*/obs-plugins/emuLensFX.so' -print -quit)"
+  module="$(find "$STAGING_PREFIX/lib" -type f -path '*/obs-plugins/emulens.so' -print -quit)"
 fi
 if [[ -z "$module" && -d "$STAGING_PREFIX/lib64" ]]; then
-  module="$(find "$STAGING_PREFIX/lib64" -type f -path '*/obs-plugins/emuLensFX.so' -print -quit)"
+  module="$(find "$STAGING_PREFIX/lib64" -type f -path '*/obs-plugins/emulens.so' -print -quit)"
 fi
-assets="$STAGING_PREFIX/share/obs/obs-plugins/emuLensFX"
+assets="$STAGING_PREFIX/share/obs/obs-plugins/emulens"
 if [[ -z "$module" || ! -s "$module" || ! -s "$assets/emulens.effect" || ! -s "$assets/locale/en-US.ini" ]]; then
   echo "Incomplete staged plugin: refusing to replace working installation" >&2
   exit 1
 fi
 
 # A non-empty file is not necessarily a shared library. Regression tests
-# previously wrote a 10-byte text fixture under the name emuLensFX.so.
+# previously wrote a 10-byte text fixture under the name emulens.so.
 # Validate the native ELF, architecture, and OBS entry points before the swap.
 if ! command -v readelf >/dev/null || ! command -v nm >/dev/null; then
   echo "Cannot verify plugin binary: readelf and nm are required" >&2
   exit 1
 fi
 if ! elf_header="$(readelf -h "$module" 2>/dev/null)" || [[ "$elf_header" != *'DYN (Shared object file)'* ]]; then
-  echo "Staged emuLensFX.so is not an ELF shared library; keeping existing plugin" >&2
+  echo "Staged emulens.so is not an ELF shared library; keeping existing plugin" >&2
   exit 1
 fi
 case "$(uname -m)" in
@@ -72,7 +72,7 @@ case "$(uname -m)" in
   aarch64) expected_machine='AArch64' ;;
 esac
 if [[ "$elf_header" != *"$expected_machine"* ]]; then
-  echo "Staged emuLensFX.so has the wrong CPU architecture; keeping existing plugin" >&2
+  echo "Staged emulens.so has the wrong CPU architecture; keeping existing plugin" >&2
   exit 1
 fi
 # Imported (U) symbols cannot satisfy OBS's dlopen module interface.
@@ -90,28 +90,28 @@ fi
 # A sibling prepare directory ensures final rename stays on the same filesystem.
 parent="$(dirname "$INSTALL_PREFIX")"
 mkdir -p "$parent"
-PREPARED="$(mktemp -d "$parent/.emuLensFX.prepare.XXXXXX")"
+PREPARED="$(mktemp -d "$parent/.emulens.prepare.XXXXXX")"
 if [[ -d "$INSTALL_PREFIX" ]]; then
   cp -a "$INSTALL_PREFIX/." "$PREPARED/"
 fi
 rm -rf -- "$PREPARED/bin" "$PREPARED/data" "$PREPARED/lib" "$PREPARED/share"
-rm -f -- "$PREPARED/emuLensFX.so"
+rm -f -- "$PREPARED/emulens.so"
 mkdir -p "$PREPARED/bin/64bit" "$PREPARED/data"
 # OBS 33+ loads third-party modules from the plugin root. Keep the legacy
 # bin/64bit copy so the same install remains usable with OBS 32 and older.
-cp -p "$module" "$PREPARED/emuLensFX.so"
-cp -p "$module" "$PREPARED/bin/64bit/emuLensFX.so"
+cp -p "$module" "$PREPARED/emulens.so"
+cp -p "$module" "$PREPARED/bin/64bit/emulens.so"
 cp -a "$assets/." "$PREPARED/data/"
-test -s "$PREPARED/emuLensFX.so"
-cmp -s "$module" "$PREPARED/emuLensFX.so"
-test -s "$PREPARED/bin/64bit/emuLensFX.so"
-cmp -s "$module" "$PREPARED/bin/64bit/emuLensFX.so"
+test -s "$PREPARED/emulens.so"
+cmp -s "$module" "$PREPARED/emulens.so"
+test -s "$PREPARED/bin/64bit/emulens.so"
+cmp -s "$module" "$PREPARED/bin/64bit/emulens.so"
 test -s "$PREPARED/data/emulens.effect"
 test -s "$PREPARED/data/locale/en-US.ini"
 
 # Preserve the old installation until the new one is fully prepared.
 if [[ -e "$INSTALL_PREFIX" ]]; then
-  BACKUP="$(mktemp -d "$parent/.emuLensFX.backup.XXXXXX")"
+  BACKUP="$(mktemp -d "$parent/.emulens.backup.XXXXXX")"
   rmdir "$BACKUP"
   mv -- "$INSTALL_PREFIX" "$BACKUP"
 fi
@@ -119,5 +119,5 @@ mv -- "$PREPARED" "$INSTALL_PREFIX"
 PREPARED=""
 SWAPPED=1
 if [[ -n "$BACKUP" ]]; then rm -rf -- "$BACKUP"; fi
-echo "Done. Restart OBS to load the updated EmuLens filter."
+echo "Done. Restart OBS to load the updated emulens filter."
 echo "Installed to: $INSTALL_PREFIX"

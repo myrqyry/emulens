@@ -1,5 +1,5 @@
 # GPU regression tests load the real module; standalone test-only configuration
-# cannot resolve TARGET_FILE:emuLensFX or prove production integration.
+# cannot resolve TARGET_FILE:emulens or prove production integration.
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     message(FATAL_ERROR "Configure tests from the project root with -DENABLE_TESTING=ON")
 endif()
@@ -481,7 +481,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
                 "-screen 0 1280x720x24"
                 "$<TARGET_FILE:test_wet_lens_gpu>"
                 "${CMAKE_CURRENT_SOURCE_DIR}/../data/emulens.effect"
-                "$<TARGET_FILE:emuLensFX>"
+                "$<TARGET_FILE:emulens>"
                 "${CMAKE_CURRENT_SOURCE_DIR}/../data")
         set_tests_properties(WetLensGpuRenderTest PROPERTIES TIMEOUT 30)
         add_executable(test_phone_wet_gpu test_phone_wet_gpu.cpp)
@@ -492,7 +492,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
                 "-screen 0 1280x720x24"
                 "$<TARGET_FILE:test_phone_wet_gpu>"
                 "${CMAKE_CURRENT_SOURCE_DIR}/../data/emulens.effect"
-                "$<TARGET_FILE:emuLensFX>"
+                "$<TARGET_FILE:emulens>"
                 "${CMAKE_CURRENT_SOURCE_DIR}/../data")
         set_tests_properties(PhoneWetGpuRenderTest PROPERTIES TIMEOUT 30)
     endif()

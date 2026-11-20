@@ -57,18 +57,18 @@ case "$1" in
     done
     libdir=lib
     if [ "$MULTIARCH_LAYOUT" = 1 ]; then libdir=lib/x86_64-linux-gnu; fi
-    mkdir -p "$dst/$libdir/obs-plugins" "$dst/share/obs/obs-plugins/emuLensFX/presets"
+    mkdir -p "$dst/$libdir/obs-plugins" "$dst/share/obs/obs-plugins/emulens/presets"
     if [ ! -e "$INCOMPLETE_MARKER" ]; then
       if [ "$INVALID_BINARY" = 1 ]; then
-        printf 'new plugin' > "$dst/$libdir/obs-plugins/emuLensFX.so"
+        printf 'new plugin' > "$dst/$libdir/obs-plugins/emulens.so"
       else
-        cp "$VALID_LIBRARY" "$dst/$libdir/obs-plugins/emuLensFX.so"
+        cp "$VALID_LIBRARY" "$dst/$libdir/obs-plugins/emulens.so"
       fi
     fi
-    printf 'new preset' > "$dst/share/obs/obs-plugins/emuLensFX/presets/test.json"
-    printf 'effect' > "$dst/share/obs/obs-plugins/emuLensFX/emulens.effect"
-    mkdir -p "$dst/share/obs/obs-plugins/emuLensFX/locale"
-    printf 'locale' > "$dst/share/obs/obs-plugins/emuLensFX/locale/en-US.ini"
+    printf 'new preset' > "$dst/share/obs/obs-plugins/emulens/presets/test.json"
+    printf 'effect' > "$dst/share/obs/obs-plugins/emulens/emulens.effect"
+    mkdir -p "$dst/share/obs/obs-plugins/emulens/locale"
+    printf 'locale' > "$dst/share/obs/obs-plugins/emulens/locale/en-US.ini"
     ;;
   -S|--build) exit 0 ;;
   *) echo "Unexpected CMake invocation: $*" >&2; exit 90 ;;
@@ -79,20 +79,20 @@ esac
                 mv = bindir / "mv"
                 mv.write_text("""#!/bin/sh
 case "$2" in
-  */.emuLensFX.prepare.*) exit 76 ;;
+  */.emulens.prepare.*) exit 76 ;;
 esac
 case "$3" in
-  */plugins/emuLensFX)
-    case "$2" in */.emuLensFX.prepare.*) exit 76 ;; esac
+  */plugins/emulens)
+    case "$2" in */.emulens.prepare.*) exit 76 ;; esac
     ;;
 esac
 exec /usr/bin/mv "$@"
 """)
                 mv.chmod(0o755)
-            prefix = root / "obs-config" / "plugins" / "emuLensFX"
+            prefix = root / "obs-config" / "plugins" / "emulens"
             (prefix / "bin" / "64bit").mkdir(parents=True)
             (prefix / "data").mkdir()
-            (prefix / "bin" / "64bit" / "emuLensFX.so").write_text("previous working plugin")
+            (prefix / "bin" / "64bit" / "emulens.so").write_text("previous working plugin")
             (prefix / "custom-user-file.txt").write_text("keep my file")
             env = os.environ.copy()
             env.update({
@@ -112,8 +112,8 @@ exec /usr/bin/mv "$@"
             self.assertNotEqual(env["HOME"], str(Path.home()))
             result = subprocess.run(["bash", str(INSTALLER)], env=env, cwd=root,
                                     capture_output=True, text=True, timeout=30)
-            installed = prefix / "bin" / "64bit" / "emuLensFX.so"
-            modern = prefix / "emuLensFX.so"
+            installed = prefix / "bin" / "64bit" / "emulens.so"
+            modern = prefix / "emulens.so"
             self.assertTrue(installed.exists(), result.stderr)
             self.assertEqual((prefix / "custom-user-file.txt").read_text(), "keep my file")
             failed = incomplete or fail_swap or invalid_binary or undefined_exports
@@ -127,8 +127,8 @@ exec /usr/bin/mv "$@"
                              result.stderr + result.stdout)
             if not failed:
                 self.assertEqual((prefix / "data" / "presets" / "test.json").read_text(), "new preset")
-            self.assertEqual(list(prefix.parent.glob(".emuLensFX.prepare.*")), [])
-            self.assertEqual(list(prefix.parent.glob(".emuLensFX.backup.*")), [])
+            self.assertEqual(list(prefix.parent.glob(".emulens.prepare.*")), [])
+            self.assertEqual(list(prefix.parent.glob(".emulens.backup.*")), [])
 
     def test_incomplete_staged_install_cannot_destroy_existing_plugin(self):
         self.run_install(incomplete=True)

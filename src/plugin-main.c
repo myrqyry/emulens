@@ -15,7 +15,7 @@
 extern struct obs_source_info emulens_filter_info;
 
 OBS_DECLARE_MODULE()
-OBS_MODULE_USE_DEFAULT_LOCALE("emuLensFX", "en-US")
+OBS_MODULE_USE_DEFAULT_LOCALE("emulens", "en-US")
 
 /**
  * @brief Returns the plugin description for OBS Plugin Manager (OBS 32+).
@@ -23,8 +23,7 @@ OBS_MODULE_USE_DEFAULT_LOCALE("emuLensFX", "en-US")
  * @note Required by OBS plugin ABI - do not modify signature.
  */
 MODULE_EXPORT const char *obs_module_description(void) {
-  return "EmuLens - GPU camera, film, and optical effects for OBS Studio "
-         "Effects";
+  return "emulens - GPU camera, film, and optical effects for OBS Studio";
 }
 
 /**
@@ -32,7 +31,7 @@ MODULE_EXPORT const char *obs_module_description(void) {
  * @return Plugin name as it appears in the UI.
  * @note Required by OBS plugin ABI - do not modify signature.
  */
-MODULE_EXPORT const char *obs_module_name(void) { return "EmuLens"; }
+MODULE_EXPORT const char *obs_module_name(void) { return "emulens"; }
 
 /**
  * @brief Returns the plugin author's identifier.
@@ -83,7 +82,7 @@ bool obs_module_load(void) {
   /* Keep this aligned with the OBS dependency declared in buildspec.json. */
 #if LIBOBS_API_MAJOR_VER < 32 ||                                             \
     (LIBOBS_API_MAJOR_VER == 32 && LIBOBS_API_MINOR_VER < 1)
-  EMULENS_LOG_ERROR("OBS %u.%u.%u detected — EmuLensFX requires OBS 32.1.0+",
+  EMULENS_LOG_ERROR("OBS %u.%u.%u detected — emulens requires OBS 32.1.0+",
                     LIBOBS_API_MAJOR_VER, LIBOBS_API_MINOR_VER,
                     LIBOBS_API_PATCH_VER);
   return false;
@@ -94,7 +93,7 @@ bool obs_module_load(void) {
           &plugin_state.initialized, &expected, true, memory_order_acq_rel,
           memory_order_acquire)) {
     /* ── Startup Banner ── */
-    EMULENS_LOG_OK("EmuLensFX v%s loaded (OBS %u.%u.%u, %s %s)", PLUGIN_VERSION,
+    EMULENS_LOG_OK("emulens v%s loaded (OBS %u.%u.%u, %s %s)", PLUGIN_VERSION,
                    LIBOBS_API_MAJOR_VER, LIBOBS_API_MINOR_VER,
                    LIBOBS_API_PATCH_VER, __DATE__, __TIME__);
 

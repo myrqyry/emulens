@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Time accumulation and wrap tests for emuLensFX.
+Time accumulation and wrap tests for emulens.
 
 Verifies lens_tick uses volatile int64_t with 2-hour wrap.
 """
@@ -65,7 +65,7 @@ def check():
 
 def main():
     print("=" * 60)
-    print("emuLensFX Time Accumulation Test")
+    print("emulens Time Accumulation Test")
     print("=" * 60)
     check()
     print("-" * 60)

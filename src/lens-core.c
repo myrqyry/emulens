@@ -192,7 +192,7 @@ static void validate_param_availability(struct lens_data *filter) {
 /*
  * Dimension-preserving filters must query the base size of their immediate
  * filter target.  Calling obs_source_get_width()/height() on a non-filter
- * parent walks that parent's filter chain and can recurse back into EmuLens.
+ * parent walks that parent's filter chain and can recurse back into emulens.
  * OBS's built-in Scroll filter uses this same base-dimension pattern.
  */
 static bool lens_get_target_base_size(struct lens_data *filter,
@@ -257,7 +257,7 @@ static bool lens_get_render_size(struct lens_data *filter, uint32_t *out_width,
 
 static const char *lens_get_name(void *unused) {
   UNUSED_PARAMETER(unused);
-  return "EmuLens";
+  return "emulens";
 }
 
 static void clear_all_shared_texrenders(struct lens_data *filter);
@@ -1235,7 +1235,7 @@ static void lens_render(void *data, gs_effect_t *effect_in) {
     /*
      * The strategy output is already complete.  Composite it back into OBS
      * with OBS's own base Draw effect instead of routing the finished texture
-     * through EmuLens's custom shader a second time.  The custom Draw path can
+     * through emulens's custom shader a second time.  The custom Draw path can
      * silently produce black on OpenGL even when the strategy pass succeeded.
      *
      * Preserve OBS's current scene-item projection/model transform here; the
@@ -1320,7 +1320,7 @@ lens_get_color_space(void *data, size_t count,
 }
 
 struct obs_source_info emulens_filter_info = {
-    .id = "emulens_fx",
+    .id = "emulens",
     .type = OBS_SOURCE_TYPE_FILTER,
     .output_flags = OBS_SOURCE_VIDEO | OBS_SOURCE_CUSTOM_DRAW,
     .get_name = lens_get_name,

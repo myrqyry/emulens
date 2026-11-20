@@ -87,11 +87,11 @@ jobs:
 
       - name: Validate staged Linux runtime payload
         run: |
-          cmake --install build_x86_64 --prefix "$RUNNER_TEMP/emulensfx-staging"
-          module=$(find "$RUNNER_TEMP/emulensfx-staging/lib" -type f -path '*/obs-plugins/emuLensFX.so' -print -quit)
+          cmake --install build_x86_64 --prefix "$RUNNER_TEMP/emulens-staging"
+          module=$(find "$RUNNER_TEMP/emulens-staging/lib" -type f -path '*/obs-plugins/emulens.so' -print -quit)
           test -n "$module" && test -s "$module"
-          test -s "$RUNNER_TEMP/emulensfx-staging/share/obs/obs-plugins/emuLensFX/emulens.effect"
-          if find "$RUNNER_TEMP/emulensfx-staging" -name AGENTS.md | grep .; then
+          test -s "$RUNNER_TEMP/emulens-staging/share/obs/obs-plugins/emulens/emulens.effect"
+          if find "$RUNNER_TEMP/emulens-staging" -name AGENTS.md | grep .; then
             echo '::error::Source-only agent guidance leaked into installed package'
             exit 1
           fi
@@ -116,9 +116,9 @@ jobs:
       - name: Upload verified Linux runtime and source
         uses: actions/upload-artifact@v6
         with:
-          name: emulensfx-linux-obs32
+          name: emulens-linux-obs32
           path: |
-            ${{ runner.temp }}/emulensfx-staging/
+            ${{ runner.temp }}/emulens-staging/
             release/*-source.tar.xz
           if-no-files-found: error
 
@@ -134,17 +134,17 @@ jobs:
       - name: Verify Windows plugin distribution
         shell: pwsh
         run: |
-          $modern = 'release/RelWithDebInfo/emuLensFX/emuLensFX.dll'
-          $legacy = 'release/RelWithDebInfo/emuLensFX/bin/64bit/emuLensFX.dll'
-          if (-not (Test-Path $modern)) { throw 'Missing OBS 33 modern-layout emuLensFX.dll' }
-          if (-not (Test-Path $legacy)) { throw 'Missing legacy-layout emuLensFX.dll' }
+          $modern = 'release/RelWithDebInfo/emulens/emulens.dll'
+          $legacy = 'release/RelWithDebInfo/emulens/bin/64bit/emulens.dll'
+          if (-not (Test-Path $modern)) { throw 'Missing OBS 33 modern-layout emulens.dll' }
+          if (-not (Test-Path $legacy)) { throw 'Missing legacy-layout emulens.dll' }
           $effects = @(Get-ChildItem -Path release -Recurse -Filter 'emulens.effect' -File)
           if ($effects.Count -lt 1) { throw 'Missing installed OBS effect resource' }
           $agentFiles = @(Get-ChildItem -Path release -Recurse -Filter AGENTS.md -File)
           if ($agentFiles.Count -ne 0) { throw 'Development-only agent files leaked into Windows distribution' }
       - uses: actions/upload-artifact@v6
         with:
-          name: emulensfx-windows-obs32
+          name: emulens-windows-obs32
           path: release/RelWithDebInfo/
           if-no-files-found: error
 
@@ -160,9 +160,9 @@ jobs:
       - name: Verify macOS plugin distribution
         shell: bash
         run: |
-          bundle=$(find release -name 'emuLensFX.plugin' -type d -print -quit)
+          bundle=$(find release -name 'emulens.plugin' -type d -print -quit)
           test -n "$bundle"
-          test -s "$bundle/Contents/MacOS/emuLensFX"
+          test -s "$bundle/Contents/MacOS/emulens"
           test -s "$bundle/Contents/Resources/emulens.effect"
           if find "$bundle" -name AGENTS.md | grep .; then
             echo '::error::Source-only agent guidance leaked into macOS bundle'
@@ -170,6 +170,6 @@ jobs:
           fi
       - uses: actions/upload-artifact@v6
         with:
-          name: emulensfx-macos-obs32
+          name: emulens-macos-obs32
           path: release/RelWithDebInfo/
           if-no-files-found: error

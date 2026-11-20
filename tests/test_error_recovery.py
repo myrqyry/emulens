@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Error recovery path tests for emuLensFX.
+Error recovery path tests for emulens.
 
 Verifies blur fallback, param validation, and failure guards.
 """
@@ -92,7 +92,7 @@ def check():
 
 def main():
     print("=" * 60)
-    print("emuLensFX Error Recovery Path Test")
+    print("emulens Error Recovery Path Test")
     print("=" * 60)
     check()
     print("-" * 60)
