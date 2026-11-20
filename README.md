@@ -213,28 +213,27 @@ still needs runtime verification on those platforms. Restart OBS afterward.
 
 ### Effects
 
-| Effect | Current behavior | Preset examples |
+| Effect | Current behavior | Presets (OBS menu names) |
 |---|---|---|
-| **Vidicon (Trails)** | Pickup-tube image persistence with temporal RGB lag, red-dominant retention, optional comet/smear artifacts, tube noise, scanlines, registration drift, halation, and hum | `vidicon_dream`, `vidicon_soft` |
-| **Starburst** | Diffraction stars from point/specular highlights; brighter highlights produce stronger and longer rays | `starburst_anamorphic`, `starburst_cinema` |
-| **Film Burn / Leak** | Procedural edge-biased light leaks with color shifting, directional bias, streaking, complexity, and multiple blend modes | `leak_warm`, `leak_chaos` |
-| **Handheld Camera** | Position/rotation drift, breathing, tremor, step bob, inertia, correction motion, and optional blur | `handheld_run`, `handheld_breathing` |
-| **Bokeh / Tilt-Shift** | Shallow depth-of-field with configurable focus region, highlight response, and 3–8 sided aperture shapes | `bokeh_neon`, `bokeh_tiltshift` |
-| **Particles** | Floating dust, snow, and motes with source influence, focus shaping, polygonal particles, chromatic separation, and size-aware energy | `part_snow`, `part_magic` |
-| **Orton Glow** | Soft-focus photographic glow with blur, contrast, brightness, saturation, highlight boost, and blend modes | `orton_angelic`, `orton_velvet` |
-| **Film Grit** | Film-stock dirt, scratches, grain, flashes, instability, tone controls, scratch types, and blend modes | `grit_grindhouse`, `grit_1920s` |
-| **Mirage** | Layered mirrored/kaleidoscopic image echoes; large radius values reflect at image bounds instead of dropping samples to black | `mirage_split`, `mirage_drunk` |
-| **Center Spot** | Clear center with an optical outer ring: Soft Diffusion, Diopter, or Radial Zoom | `spot_mist`, `spot_vignette`, `spot_tunnel` |
-| **Bloom / Glow** | Multi-level bright-pass bloom with optional fixed lens contamination that scatters, veils, glints, refracts, ghosts, and supports anamorphic response | `bloom_dusty_lens`, `bloom_prism` |
-| **Pinhole** | Soft lensless-camera rendering with vignette, distortion, sepia, and grain | `pinhole_classic`, `pinhole_antique` |
-| **Polaroid** | Instant-film color response with softness, vignette, emulsion shift, development, grain, and bleed | `polaroid_expired`, `polaroid_vintage` |
-| **Daguerreotype** | Silver-plate contrast, grain, tint, vignette, and edge softness | `daguerre_silver`, `daguerre_tarnished` |
-| **Technicolor 2-Strip** | Restricted red/cyan dye-transfer character with saturation, strip offset, and glow | `technicolor_classic`, `technicolor_misaligned` |
-| **Wet Lens** | Stationary water-bead refraction of captured live pixels, with light-gathering glints | `default_wet_lens`, `wet_lens_night_window` |
-| **Phone Wet Lens** | Broad near-lens refraction regions, captured-light ribbons and veiling glare | `default_phone_wet`, `phone_wet_streetlights` |
+| **Vidicon (Trails)** | Pickup-tube image persistence with temporal RGB lag, red-dominant retention, optional comet/smear artifacts, tube noise, scanlines, registration drift, halation, and hum | **Vidicon: Tube Camera**, Vidicon: Long Exposure, Vidicon: Clean Tube |
+| **Starburst** | Diffraction stars from point/specular highlights; brighter highlights produce stronger and longer rays | **Starburst: Diffraction**, Starburst: Horizontal Streak, Starburst: Glint, Starburst: Cross Filter |
+| **Film Burn / Leak** | Procedural edge-biased light leaks with color shifting, directional bias, streaking, complexity, and multiple blend modes | **Film Burn: Edge Leak**, Film Burn: Warm Edge, Film Burn: Gate Flash, Film Burn: Amber |
+| **Handheld Camera** | Position/rotation drift, breathing, tremor, step bob, inertia, correction motion, and optional blur | **Handheld: Operator**, Handheld: Running, Handheld: Breathing, Handheld: Drift |
+| **Bokeh / Tilt-Shift** | Shallow depth-of-field with configurable focus region, highlight response, and 3–8 sided aperture shapes | **Bokeh: Natural**, Bokeh: Center Focus, Bokeh: Soft Focus, Bokeh: Night Lights |
+| **Particles** | Floating dust, snow, and motes with source influence, focus shaping, polygonal particles, chromatic separation, and size-aware energy | **Particles: Natural**, Particles: Dust, Particles: Prism Motes, Particles: Snow |
+| **Orton Glow** | Soft-focus photographic glow with blur, contrast, brightness, saturation, highlight boost, and blend modes | **Orton: Soft Print**, Orton: Veil, Orton: Dream Print, Orton: Velvet |
+| **Film Grit** | Film-stock dirt, scratches, grain, flashes, instability, tone controls, scratch types, and blend modes | **Grit: Fine Stock**, Grit: 1920s, Grit: Worn Print, Grit: Projector |
+| **Mirage** | Layered mirrored/kaleidoscopic image echoes; large radius values reflect at image bounds instead of dropping samples to black | **Mirage: Glass Echo**, Mirage: Kaleidoscope, Mirage: Double Vision, Mirage: Split |
+| **Center Spot** | Clear center with an optical outer ring: Soft Diffusion, Diopter, or Radial Zoom | **Spot: Soft Spot**, Spot: Diopter, Spot: Diffusion, Spot: Radial Zoom |
+| **Bloom / Glow** | Multi-level bright-pass bloom with optional fixed lens contamination that scatters, veils, glints, refracts, ghosts, and supports anamorphic response | **Bloom: Clean Highlights**, Bloom: Halation, Bloom: Dusty Lens, Bloom: Night Glass, Bloom: Coated Glass |
+| **Pinhole** | Soft lensless-camera rendering with vignette, distortion, sepia, and grain | **Pinhole: Optical**, Pinhole: Classic, Pinhole: Album Print |
+| **Polaroid** | Instant-film color response with softness, vignette, emulsion shift, development, grain, and bleed | **Polaroid: Fresh Pack**, Polaroid: Warm Pack, Polaroid: Expired Pack |
+| **Daguerreotype** | Silver-plate contrast, grain, tint, vignette, and edge softness | **Daguerreotype: Balanced Plate**, Daguerreotype: Polished Plate, Daguerreotype: Tarnished Plate |
+| **Technicolor 2-Strip** | Restricted red/cyan dye-transfer character with saturation, strip offset, and glow | **Technicolor: Balanced Two-Strip**, Technicolor: Two-Strip Print, Technicolor: Registration Slip |
+| **Wet Lens** | Stationary water-bead refraction of captured live pixels, with light-gathering glints | **Clean Raindrops**, Night Window |
+| **Phone Wet Lens** | Broad near-lens refraction regions, captured-light ribbons and veiling glare | **Wet Phone Camera**, Rain on Streetlights, Heavy Wet Optics |
 
-Every mode has an explicit `default_<mode>.json` preset whose visible values
-match that strategy's runtime defaults.
+**Bold** preset names are the defaults. All names above match the OBS preset menu.
 
 ## Effect controls
 
