@@ -100,12 +100,12 @@ void orton_destroy(struct lens_data *filter) { (void)filter; }
 void orton_get_defaults(obs_data_t *settings) {
   // Preserve highlight detail by default. The previous additive 0.6-strength
   // baseline clipped ordinary footage before the user touched a control.
-  obs_data_set_default_double(settings, P_ORTON_BLUR_RADIUS, 8.0);
-  obs_data_set_default_double(settings, P_ORTON_BLUR_STRENGTH, 0.22);
-  obs_data_set_default_double(settings, P_ORTON_CONTRAST, 1.03);
-  obs_data_set_default_double(settings, P_ORTON_BRIGHTNESS, -0.03);
+  obs_data_set_default_double(settings, P_ORTON_BLUR_RADIUS, 14.0);
+  obs_data_set_default_double(settings, P_ORTON_BLUR_STRENGTH, 0.34);
+  obs_data_set_default_double(settings, P_ORTON_CONTRAST, 1.0);
+  obs_data_set_default_double(settings, P_ORTON_BRIGHTNESS, -0.025);
   obs_data_set_default_double(settings, P_ORTON_SATURATION, 1.02);
-  obs_data_set_default_double(settings, P_ORTON_HIGHLIGHT_BOOST, 0.22);
+  obs_data_set_default_double(settings, P_ORTON_HIGHLIGHT_BOOST, 0.4);
   obs_data_set_default_int(settings, P_ORTON_BLEND_MODE, 1);
 }
 

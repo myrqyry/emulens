@@ -41,7 +41,7 @@ void mirage_get_defaults(obs_data_t *settings) {
   obs_data_set_default_int(settings, P_MIR_COUNT, 4);
   obs_data_set_default_double(settings, P_MIR_RADIUS, 0.035);
   obs_data_set_default_double(settings, P_MIR_ROTATION, 0.0);
-  obs_data_set_default_double(settings, P_MIR_ROT_SPEED, 0.0);
+  obs_data_set_default_double(settings, P_MIR_ROT_SPEED, 2.0);
   obs_data_set_default_double(settings, P_MIR_CENTER_MASK, 0.28);
   obs_data_set_default_bool(settings, P_MIR_PARALLEL, false);
 }

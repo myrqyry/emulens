@@ -78,18 +78,18 @@ void starburst_get_defaults(obs_data_t *settings) {
   // stylization choices, not defaults.
   obs_data_set_default_double(settings, P_SB_THRESHOLD, SB_THRESHOLD_DEFAULT);
   obs_data_set_default_double(settings, P_SB_INTENSITY, SB_INTENSITY_DEFAULT);
-  obs_data_set_default_int(settings, P_SB_POINTS, 6);
-  obs_data_set_default_double(settings, P_SB_RAY_LENGTH, 0.16);
-  obs_data_set_default_double(settings, P_SB_THICKNESS, 0.9);
-  obs_data_set_default_double(settings, P_SB_SMOOTHNESS, 4.5);
+  obs_data_set_default_int(settings, P_SB_POINTS, 4);
+  obs_data_set_default_double(settings, P_SB_RAY_LENGTH, 0.24);
+  obs_data_set_default_double(settings, P_SB_THICKNESS, 1.5);
+  obs_data_set_default_double(settings, P_SB_SMOOTHNESS, 1.6);
   obs_data_set_default_bool(settings, P_SB_COLORIZE, false);
   obs_data_set_default_int(settings, P_SB_COLOR, 0xFFFFFFFF);
-  obs_data_set_default_double(settings, P_SB_CHROMA, 0.02);
+  obs_data_set_default_double(settings, P_SB_CHROMA, 0.0);
   obs_data_set_default_double(settings, P_SB_ROT_SPEED, 0.0);
-  obs_data_set_default_double(settings, P_SB_ROTATION, 0.0);
+  obs_data_set_default_double(settings, P_SB_ROTATION, 45.0);
   obs_data_set_default_double(settings, P_SB_PULSE_SPEED, 0.18);
   obs_data_set_default_double(settings, P_SB_PULSE_AMP, 0.0);
-  obs_data_set_default_int(settings, P_SB_SAMPLES, 12);
+  obs_data_set_default_int(settings, P_SB_SAMPLES, 16);
   obs_data_set_default_bool(settings, P_SB_ANAMORPHIC, false);
   obs_data_set_default_int(settings, P_SB_BLEND_MODE, 1);
 }

@@ -50,15 +50,15 @@ void phone_wet_destroy_cpu(struct lens_data *filter) { (void)filter; }
 void phone_wet_destroy(struct lens_data *filter) { (void)filter; }
 
 void phone_wet_get_defaults(obs_data_t *settings) {
-  obs_data_set_default_double(settings, P_PHONE_COVERAGE, 0.48);
-  obs_data_set_default_double(settings, P_PHONE_SCALE, 1.0);
-  obs_data_set_default_double(settings, P_PHONE_REFRACTION, 0.55);
-  obs_data_set_default_double(settings, P_PHONE_RIBBONS, 0.45);
-  obs_data_set_default_double(settings, P_PHONE_REACH, 0.58);
-  obs_data_set_default_double(settings, P_PHONE_GLOW, 0.24);
-  obs_data_set_default_double(settings, P_PHONE_ARCS, 0.38);
-  obs_data_set_default_double(settings, P_PHONE_ANGLE, 0.0);
-  obs_data_set_default_int(settings, P_PHONE_SEED, 19);
+  obs_data_set_default_double(settings, P_PHONE_COVERAGE, 0.8);
+  obs_data_set_default_double(settings, P_PHONE_SCALE, 1.05);
+  obs_data_set_default_double(settings, P_PHONE_REFRACTION, 0.95);
+  obs_data_set_default_double(settings, P_PHONE_RIBBONS, 1.4);
+  obs_data_set_default_double(settings, P_PHONE_REACH, 0.8);
+  obs_data_set_default_double(settings, P_PHONE_GLOW, 0.4);
+  obs_data_set_default_double(settings, P_PHONE_ARCS, 1.35);
+  obs_data_set_default_double(settings, P_PHONE_ANGLE, 12.0);
+  obs_data_set_default_int(settings, P_PHONE_SEED, 44);
 }
 
 void phone_wet_populate_presets(obs_property_t *list) {

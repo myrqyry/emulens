@@ -543,32 +543,42 @@ uniform float leak_contrast = 1.35;
 uniform float leak_complexity = 3.0;
 uniform float leak_blend_mode = 2.0;
 
+// Interpolate a coarse random lattice for spatially coherent stray light.
+// The shared texture noise is intentionally high-frequency for film grain;
+// warping with it made bright light leaks look like colored static.
+float leak_value_noise(float2 p) {
+    float2 cell = floor(p);
+    float2 t = frac(p);
+    t = t * t * (3.0 - 2.0 * t);
+    float k0 = lerp(emu_rand(cell), emu_rand(cell + float2(1.0, 0.0)), t.x);
+    float k1 = lerp(emu_rand(cell + float2(0.0, 1.0)), emu_rand(cell + float2(1.0, 1.0)), t.x);
+    return lerp(k0, k1, t.y);
+}
+
 float warp_fbm(float2 p, int octaves) {
     float total = 0.0;
     float amp = 0.5;
-    float freq = 1.0;
     float2 shift = float2(100.0, 100.0);
     float c = cos(0.5);
     float s = sin(0.5);
 
     float2 q = float2(0.0, 0.0);
-    q.x = snoise(p);
-    q.y = snoise(p + float2(5.2, 1.3));
+    q.x = leak_value_noise(p);
+    q.y = leak_value_noise(p + float2(5.2, 1.3));
 
     float2 r = float2(0.0, 0.0);
-    r.x = snoise(p + 1.0*q + float2(1.7, 9.2));
-    r.y = snoise(p + 1.0*q + float2(8.3, 2.8));
+    r.x = leak_value_noise(p + 1.0*q + float2(1.7, 9.2));
+    r.y = leak_value_noise(p + 1.0*q + float2(8.3, 2.8));
 
     float2 warped_p = p + r;
 
     for(int i = 0; i < 8; i++) {
         if (i >= octaves) break;
-        total += snoise(warped_p * freq) * amp;
+        total += leak_value_noise(warped_p) * amp;
         float nx = warped_p.x * c - warped_p.y * s;
         float ny = warped_p.x * s + warped_p.y * c;
         warped_p = float2(nx, ny) * 2.0 + shift;
         amp *= 0.5;
-        freq *= 2.0;
     }
     return total;
 }
@@ -1414,6 +1424,46 @@ float3 PSGritBlend(float3 original_rgb, float3 grit_rgb, int blend_mode) {
                 check);
 }
 
+// A film scratch runs along the direction of film travel. Its narrow
+// cross-section and lifespan are independent of the frame's subject.
+float grit_line(float2 uv, float frame_group, float density, float2 pixel_size) {
+    float cell = floor(uv.x * 64.0);
+    float seed = emu_rand(float2(cell, frame_group + 17.0));
+    float center = (cell + 0.2 + 0.6 * emu_rand(float2(cell, frame_group + 43.0))) / 64.0;
+    float line = 1.0 - smoothstep(pixel_size.x * 0.35, pixel_size.x * 1.6, abs(uv.x - center));
+    float fade = smoothstep(0.0, 0.09, uv.y) * smoothstep(0.0, 0.09, 1.0 - uv.y);
+    return line * fade * step(1.0 - density * 0.10, seed);
+}
+
+// Direct film texture: avoid reblending a copy of the entire source against
+// itself. Keep the original blend IDs and their behavior for saved presets.
+float3 grit_direct(float3 base, float2 uv, float t) {
+    float2 px = max(uv_pixel_interval.xy, float2(0.000001, 0.000001));
+    float grain = emu_rand(floor(uv / px) + float2(t * 19.0, t * 31.0)) * 2.0 - 1.0;
+    float grain_response = 0.55 + 0.45 * (1.0 - abs(dot(base, float3(0.299, 0.587, 0.114)) * 2.0 - 1.0));
+    float3 result = base + grain * grit_noise * grit_opacity * 0.42 * grain_response;
+    float aspect = px.y / px.x;
+    float2 grid = uv * float2(48.0 * aspect, 48.0);
+    float2 cell = floor(grid);
+    float2 seed = cell + float2(t * 7.0, t * 11.0);
+    float2 center = float2(emu_rand(seed + 5.0), emu_rand(seed + 23.0)) * 0.6 + 0.2;
+    float size = min(0.32, 0.13 * grit_dust_size);
+    float dust = (1.0 - smoothstep(size * 0.45, size, length(frac(grid) - center))) *
+        step(1.0 - grit_dust * 0.09, emu_rand(seed + 91.0));
+    float group = floor(t / 8.0);
+    int scratch_type = f2i(grit_scratch_type);
+    float scratch = 0.0;
+    if (scratch_type != 0) scratch = grit_line(uv, group, grit_scratches, px);
+    if (scratch_type != 1) scratch = max(scratch, grit_line(uv.yx, group + 13.0, grit_scratches, px.yx));
+    float damage = saturate(dust + scratch * 0.8) * grit_opacity;
+    result = lerp(result, grit_color.rgb, damage);
+    result += grit_color.rgb * (sin(elapsed_time * 2.0) * 0.5 + 0.5) * grit_flares * grit_opacity * 0.3;
+    result += grit_brightness * grit_opacity;
+    result = lerp(float3(0.5, 0.5, 0.5), result, lerp(1.0, grit_contrast, grit_opacity));
+    float gray = dot(result, float3(0.299, 0.587, 0.114));
+    return saturate(lerp(float3(gray, gray, gray), result, lerp(1.0, grit_saturation, grit_opacity)));
+}
+
 float4 PSGrit(VertData v_in) : TARGET {
     float4 original = image.Sample(textureSampler, v_in.uv);
     float2 uv = v_in.uv;
@@ -1427,6 +1477,11 @@ float4 PSGrit(VertData v_in) : TARGET {
 
     float3 base = image.Sample(textureSampler, uv).rgb;
     float t_grit = floor(elapsed_time * 18.0);
+    if (f2i(grit_blend_mode) == 6) {
+        float3 direct = grit_direct(base, uv, t_grit);
+        return float4(direct + ForceUniformUsageRGB(), original.a);
+    }
+
 
     float noise = snoise(uv * 200.0 + t_grit);
     float3 grit_layer = float3(0,0,0);

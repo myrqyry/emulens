@@ -12,11 +12,11 @@
 // Starburst parameters
 #define SB_THRESHOLD_MIN 0.0f
 #define SB_THRESHOLD_MAX 1.0f
-#define SB_THRESHOLD_DEFAULT 0.84f
+#define SB_THRESHOLD_DEFAULT 0.72f
 
 #define SB_INTENSITY_MIN 0.0f
 #define SB_INTENSITY_MAX 10.0f
-#define SB_INTENSITY_DEFAULT 0.65f
+#define SB_INTENSITY_DEFAULT 1.8f
 
 // Handheld parameters
 #define HAND_POS_AMP_MIN 0.0f

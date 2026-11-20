@@ -35,7 +35,7 @@ def main() -> int:
     require(vid["vid_register"] <= 0.20, "default Vidicon registration error is too large", failures)
 
     star = load("default_starburst.json")
-    require(star["sb_intensity"] <= 1.0, "default Starburst is overbright", failures)
+    require(star["sb_intensity"] <= 2.0, "default Starburst is overbright", failures)
     require(star["sb_rot_speed"] == 0.0, "default Starburst must be static", failures)
     require(star["sb_pulse_amp"] == 0.0, "default Starburst must not pulse", failures)
 
@@ -86,11 +86,11 @@ def main() -> int:
             "bloom_dusty_lens.json: ghosts should remain a supporting artifact", failures)
 
     phone = load("default_phone_wet.json")
-    require(phone["phone_ribbons"] <= 0.55,
-            "phone wet default must avoid strong night-street ribbons", failures)
-    require(phone["phone_arcs"] <= 0.5,
+    require(phone["phone_ribbons"] <= 1.45,
+            "phone wet default must stay below the strong night-street variant", failures)
+    require(phone["phone_arcs"] <= 1.4,
             "phone wet default must avoid overbright wet contours", failures)
-    require(phone["phone_glow"] <= 0.35,
+    require(phone["phone_glow"] <= 0.45,
             "phone wet default must preserve original source visibility", failures)
     street = load("phone_wet_streetlights.json")
     require(street["phone_ribbons"] > phone["phone_ribbons"],

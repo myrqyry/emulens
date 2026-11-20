@@ -1,0 +1,120 @@
+{
+  "source": "Department of Questionable Optics (generated source footage)",
+  "capture": "Real isolated OBS/OpenGL capture, fresh runtime defaults",
+  "size": [
+    640,
+    360
+  ],
+  "fps": 30,
+  "frames": 90,
+  "effects": [
+    {
+      "name": "Original",
+      "file": "original.webp",
+      "preset": "clean",
+      "sha256": "a35f066c720fac7ab14c612da65eff3198e4edfd086fed01e2144f979e920b36"
+    },
+    {
+      "name": "Vidicon",
+      "file": "vidicon.webp",
+      "preset": "runtime-default:0",
+      "sha256": "7e5d2788c52abc6e37e34db45a16bb99bae178bdfc3d588e7006b189f7905824"
+    },
+    {
+      "name": "Starburst",
+      "file": "starburst.webp",
+      "preset": "runtime-default:1",
+      "sha256": "25c532e91c425352bd71f711bea9327ca3588680e1d7cd905ff1166874a1e35a"
+    },
+    {
+      "name": "Light Leak",
+      "file": "light-leak.webp",
+      "preset": "runtime-default:2",
+      "sha256": "4504b3178e8c53f33dc31a645007e313da28b071e3d9094cd73629aaa1ad9939"
+    },
+    {
+      "name": "Handheld",
+      "file": "handheld.webp",
+      "preset": "runtime-default:3",
+      "sha256": "dfc27d0351c626911cd95d299c9e3683eadeb9f0253f2efce83f6fe4719623c4"
+    },
+    {
+      "name": "Bokeh",
+      "file": "bokeh.webp",
+      "preset": "runtime-default:4",
+      "sha256": "88742bd5a5e6e62c0fab2369476ebf0bae68f8e216b732854665be95d8273a6f"
+    },
+    {
+      "name": "Particles",
+      "file": "particles.webp",
+      "preset": "runtime-default:5",
+      "sha256": "57b19b0e1fbd9c6542b7eec0424b002a92e0adb30ca4d016f7944f915e62bdb0"
+    },
+    {
+      "name": "Orton Glow",
+      "file": "orton.webp",
+      "preset": "runtime-default:6",
+      "sha256": "a9778822367125362f94351baf772be4e72b1c8311fd5efdcbabe8812ea23f75"
+    },
+    {
+      "name": "Film Grit",
+      "file": "film-grit.webp",
+      "preset": "runtime-default:7",
+      "sha256": "28da3f1652a574cf92e3646ca5078efedf801bcba43116ae1ba90e2cb55f32e3"
+    },
+    {
+      "name": "Mirage",
+      "file": "mirage.webp",
+      "preset": "runtime-default:8",
+      "sha256": "c95dd053e7ceb199e3a21286943e757358c0b2e9aba476c2b5cdf706c8b94278"
+    },
+    {
+      "name": "Center Spot",
+      "file": "center-spot.webp",
+      "preset": "runtime-default:9",
+      "sha256": "4a3d35a31ceb94b54d7e4e92cdf6e226a7b6fee2c3529b990cc93c8674338ca5"
+    },
+    {
+      "name": "Bloom",
+      "file": "bloom.webp",
+      "preset": "runtime-default:10",
+      "sha256": "2c3d2c71e9e555a2013d7e201765dfd2d2e7d876a44b78d1076189079f7fb4d7"
+    },
+    {
+      "name": "Pinhole",
+      "file": "pinhole.webp",
+      "preset": "runtime-default:11",
+      "sha256": "0d89f1187812764cb81625991ecc073fe43f99ad9f614e00e6dd7cee757413a6"
+    },
+    {
+      "name": "Polaroid",
+      "file": "polaroid.webp",
+      "preset": "runtime-default:12",
+      "sha256": "e3a201be06d578df74aebd493b6a224f94ecb604e92cb4e6a14f87e2b3694168"
+    },
+    {
+      "name": "Daguerreotype",
+      "file": "daguerreotype.webp",
+      "preset": "runtime-default:13",
+      "sha256": "b3d95b73737772f0396b1f5c56556819012e0269b1831a9f19bc305ec0d10c17"
+    },
+    {
+      "name": "Technicolor 2-Strip",
+      "file": "technicolor.webp",
+      "preset": "runtime-default:14",
+      "sha256": "1043937406d147b0c6af9f526c7c8cc1b80623cff349c4d0783d644be4ef80fa"
+    },
+    {
+      "name": "Wet Lens",
+      "file": "wet-lens.webp",
+      "preset": "runtime-default:15",
+      "sha256": "199c420f3814db296223a139063f4f1e94cc83545d5c8a8a55e5547098559998"
+    },
+    {
+      "name": "Phone Wet Lens",
+      "file": "phone-wet-lens.webp",
+      "preset": "runtime-default:16",
+      "sha256": "cba70ddf0c77fbade1db0bdd446047672c5fea74a6f857f65f37a73ee9355703"
+    }
+  ]
+}

@@ -106,6 +106,7 @@ foreach(test_script
         test_filter_chain_dimensions.py
         test_default_preset_contract.py
         test_preset_restraint.py
+        test_showcase_default_contract.py
         test_vidicon_feedback_stability.py
         test_bloom_pyramid.py
         test_bloom_responsiveness.py

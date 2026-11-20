@@ -1004,6 +1004,7 @@ static void add_grit_properties(obs_properties_t *props) {
       OBS_COMBO_TYPE_LIST, OBS_COMBO_FORMAT_INT);
   obs_property_set_long_description(grit_blend,
                                     obs_module_text("BlendModeTooltip"));
+  obs_property_list_add_int(grit_blend, obs_module_text("GritDirect"), 6);
   obs_property_list_add_int(grit_blend, obs_module_text("Multiply"), 0);
   obs_property_list_add_int(grit_blend, obs_module_text("Screen"), 1);
   obs_property_list_add_int(grit_blend, obs_module_text("Overlay"), 2);

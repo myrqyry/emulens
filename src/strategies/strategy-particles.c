@@ -107,15 +107,15 @@ void particles_destroy_cpu(struct lens_data *filter) { (void)filter; }
 void particles_destroy(struct lens_data *filter) { (void)filter; }
 
 void particles_get_defaults(obs_data_t *settings) {
-  obs_data_set_default_double(settings, P_PART_DENSITY, 18.0);
-  obs_data_set_default_double(settings, P_PART_SIZE, 0.004);
+  obs_data_set_default_double(settings, P_PART_DENSITY, 14.0);
+  obs_data_set_default_double(settings, P_PART_SIZE, 0.012);
   obs_data_set_default_double(settings, P_PART_SIZE_VAR, 0.55);
-  obs_data_set_default_double(settings, P_PART_SPEED, 0.25);
-  obs_data_set_default_double(settings, P_PART_WIND_X, 0.02);
-  obs_data_set_default_double(settings, P_PART_WIND_Y, -0.01);
+  obs_data_set_default_double(settings, P_PART_SPEED, 0.55);
+  obs_data_set_default_double(settings, P_PART_WIND_X, 0.08);
+  obs_data_set_default_double(settings, P_PART_WIND_Y, -0.08);
   obs_data_set_default_double(settings, P_PART_WOBBLE, 0.16);
-  obs_data_set_default_int(settings, P_PART_COLOR_START, 0x66FFFFFF);
-  obs_data_set_default_int(settings, P_PART_COLOR_END, 0x18FFFFFF);
+  obs_data_set_default_int(settings, P_PART_COLOR_START, 2868903935);
+  obs_data_set_default_int(settings, P_PART_COLOR_END, 1090519039);
   obs_data_set_default_bool(settings, P_PART_SOURCE_COLOR, false);
   obs_data_set_default_double(settings, P_PART_SOURCE_INFLUENCE, 0.0);
   obs_data_set_default_bool(settings, P_PART_SOURCE_BRIGHTNESS, false);
@@ -124,7 +124,7 @@ void particles_get_defaults(obs_data_t *settings) {
   obs_data_set_default_double(settings, P_PART_FOCUS_X, 0.5);
   obs_data_set_default_double(settings, P_PART_FOCUS_Y, 0.5);
   obs_data_set_default_double(settings, P_PART_FOCUS_STRENGTH, 0.0);
-  obs_data_set_default_double(settings, P_PART_BLUR_EDGE, 0.65);
+  obs_data_set_default_double(settings, P_PART_BLUR_EDGE, 0.45);
   obs_data_set_default_bool(settings, P_PART_USE_POLY, false);
   obs_data_set_default_int(settings, P_PART_POLY_SIDES, 6);
   obs_data_set_default_double(settings, P_PART_POLY_ROT, 0.0);

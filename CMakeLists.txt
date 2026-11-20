@@ -110,3 +110,10 @@ if(ENABLE_TESTING)
     message(STATUS "Tests enabled - configuring test project")
     add_subdirectory(tests)
 endif()
+
+# Opt-in showcase utility; not part of packaged plugin.
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    add_executable(capture-showcase EXCLUDE_FROM_ALL tools/capture-showcase.cpp)
+    target_link_libraries(capture-showcase PRIVATE OBS::libobs)
+    set_target_properties(capture-showcase PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED ON)
+endif()

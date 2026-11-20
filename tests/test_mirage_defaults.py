@@ -12,7 +12,7 @@ def main() -> int:
     required = [
         'obs_data_set_default_int(settings, P_MIR_COUNT, 4);',
         'obs_data_set_default_double(settings, P_MIR_RADIUS, 0.035);',
-        'obs_data_set_default_double(settings, P_MIR_ROT_SPEED, 0.0);',
+        'obs_data_set_default_double(settings, P_MIR_ROT_SPEED, 2.0);',
     ]
 
     for line in required:
@@ -20,7 +20,7 @@ def main() -> int:
             print(f"FAIL: missing mirage default: {line}")
             return 1
 
-    print("PASS: mirage defaults keep the optical echo subtle and static")
+    print("PASS: mirage defaults keep the optical echo small and gently rotating")
     return 0
 
 

@@ -82,22 +82,22 @@ void leak_destroy(struct lens_data *filter) { (void)filter; }
 void leak_get_defaults(obs_data_t *settings) {
   // One localized warm leak reads like stray light; equal pressure from all
   // four edges reads like a procedural overlay.
-  obs_data_set_default_double(settings, P_LEAK_INTENSITY, 0.55);
-  obs_data_set_default_double(settings, P_LEAK_SPEED, 0.04);
+  obs_data_set_default_double(settings, P_LEAK_INTENSITY, 0.75);
+  obs_data_set_default_double(settings, P_LEAK_SPEED, 0.12);
   obs_data_set_default_double(settings, P_LEAK_COLOR_SPEED, 0.02);
   obs_data_set_default_double(settings, P_LEAK_SCALE, 1.4);
   obs_data_set_default_int(settings, P_LEAK_COLOR, 0xFF4488FF);
   obs_data_set_default_bool(settings, P_LEAK_COLOR_ENABLE_SHIFT, false);
   obs_data_set_default_int(settings, P_LEAK_COLOR_SHIFT, 0xFFFFFFFF);
-  obs_data_set_default_double(settings, P_LEAK_BIAS_TOP, 0.15);
-  obs_data_set_default_double(settings, P_LEAK_BIAS_BOT, 0.10);
-  obs_data_set_default_double(settings, P_LEAK_BIAS_LEFT, 0.75);
-  obs_data_set_default_double(settings, P_LEAK_BIAS_RIGHT, 0.05);
-  obs_data_set_default_double(settings, P_LEAK_EDGE_FALLOFF, 4.5);
+  obs_data_set_default_double(settings, P_LEAK_BIAS_TOP, 0.035);
+  obs_data_set_default_double(settings, P_LEAK_BIAS_BOT, 0.035);
+  obs_data_set_default_double(settings, P_LEAK_BIAS_LEFT, 0.65);
+  obs_data_set_default_double(settings, P_LEAK_BIAS_RIGHT, 0.015);
+  obs_data_set_default_double(settings, P_LEAK_EDGE_FALLOFF, 4.0);
   obs_data_set_default_double(settings, P_LEAK_STREAKINESS, 0.75);
-  obs_data_set_default_double(settings, P_LEAK_CONTRAST, 1.35);
+  obs_data_set_default_double(settings, P_LEAK_CONTRAST, 1.15);
   obs_data_set_default_int(settings, P_LEAK_COMPLEXITY, 3);
-  obs_data_set_default_int(settings, P_LEAK_BLEND_MODE, 2);
+  obs_data_set_default_int(settings, P_LEAK_BLEND_MODE, 1);
 }
 
 void leak_populate_presets(obs_property_t *list) {
