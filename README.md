@@ -11,7 +11,7 @@ graphics pipeline.
 
 ## Showcase
 
-Actual OBS renders using the shipped runtime defaults.
+Actual OBS renders using shipped defaults and selected presets.
 
 <table>
   <tr>
@@ -240,9 +240,7 @@ match that strategy's runtime defaults.
 
 See the [optical behavior and controls guide](docs/EFFECTS.md) for detailed
 information on Vidicon persistence, Bloom, Center Spot, Starburst, Mirage,
-Particles and water-on-lens effects. Film Grit's default Direct film texture
-adds grain and fleeting dust/scratches without forcing a contrast blend.
-The original blend modes remain available.
+Particles and water-on-lens effects.
 
 To reproduce the animations, see [Capture an effect showcase](docs/SHOWCASE.md).
 

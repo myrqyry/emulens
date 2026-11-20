@@ -41,7 +41,7 @@ void grit_update(struct lens_data *filter, obs_data_t *settings) {
   SET_CLAMPED_DOUBLE(filter->mode_params.grit.instability, settings,
                      P_GRIT_INSTABILITY, 0.0f, 2.0f);
   SET_CLAMPED_INT_AS_FLOAT(filter->mode_params.grit.blend_mode, settings,
-                           P_GRIT_BLEND_MODE, 0.0f, 6.0f);
+                           P_GRIT_BLEND_MODE, 0.0f, 5.0f);
   SET_CLAMPED_DOUBLE(filter->mode_params.grit.scratch_type, settings,
                      P_GRIT_SCRATCH_TYPE, 0.0f, 2.0f);
   SET_CLAMPED_DOUBLE(filter->mode_params.grit.dust_size, settings,
@@ -61,19 +61,19 @@ void grit_destroy_cpu(struct lens_data *filter) { (void)filter; }
 void grit_destroy(struct lens_data *filter) { (void)filter; }
 
 void grit_get_defaults(obs_data_t *settings) {
-  obs_data_set_default_double(settings, P_GRIT_DUST, .22);
-  obs_data_set_default_double(settings, P_GRIT_SCRATCHES, .28);
-  obs_data_set_default_double(settings, P_GRIT_NOISE, .4);
+  obs_data_set_default_double(settings, P_GRIT_DUST, 0.24);
+  obs_data_set_default_double(settings, P_GRIT_SCRATCHES, 0.22);
+  obs_data_set_default_double(settings, P_GRIT_NOISE, 0.18);
   obs_data_set_default_double(settings, P_GRIT_FLARES, 0.0);
-  obs_data_set_default_double(settings, P_GRIT_BRIGHTNESS, 0.0);
-  obs_data_set_default_double(settings, P_GRIT_CONTRAST, 1.0);
-  obs_data_set_default_double(settings, P_GRIT_SATURATION, 0.98);
-  obs_data_set_default_double(settings, P_GRIT_OPACITY, .4);
-  obs_data_set_default_double(settings, P_GRIT_INSTABILITY, 0.10);
-  obs_data_set_default_int(settings, P_GRIT_BLEND_MODE, 6);
-  obs_data_set_default_int(settings, P_GRIT_COLOR, 0xFFCCCCCC);
+  obs_data_set_default_double(settings, P_GRIT_BRIGHTNESS, 0.015);
+  obs_data_set_default_double(settings, P_GRIT_CONTRAST, 1.02);
+  obs_data_set_default_double(settings, P_GRIT_SATURATION, 0.78);
+  obs_data_set_default_double(settings, P_GRIT_OPACITY, 0.4);
+  obs_data_set_default_double(settings, P_GRIT_INSTABILITY, 0.16);
+  obs_data_set_default_int(settings, P_GRIT_BLEND_MODE, 3);
+  obs_data_set_default_int(settings, P_GRIT_COLOR, 0xFF888888);
   obs_data_set_default_int(settings, P_GRIT_SCRATCH_TYPE, 1);
-  obs_data_set_default_double(settings, P_GRIT_DUST_SIZE, 1.0);
+  obs_data_set_default_double(settings, P_GRIT_DUST_SIZE, 0.8);
 }
 
 void grit_populate_presets(obs_property_t *list) {

@@ -1,6 +1,6 @@
 {
   "source": "Department of Questionable Optics (generated source footage)",
-  "capture": "Real isolated OBS/OpenGL capture, fresh runtime defaults",
+  "capture": "Real isolated OBS/OpenGL renders; preserved selected presets and refreshed runtime defaults",
   "size": [
     640,
     360
@@ -17,8 +17,8 @@
     {
       "name": "Vidicon",
       "file": "vidicon.webp",
-      "preset": "runtime-default:0",
-      "sha256": "7e5d2788c52abc6e37e34db45a16bb99bae178bdfc3d588e7006b189f7905824"
+      "preset": "vidicon_dream",
+      "sha256": "7b51d9d77081259cc6c88f6afad6861a1670543a7061bbd6f3e6d5874271f37e"
     },
     {
       "name": "Starburst",
@@ -30,19 +30,19 @@
       "name": "Light Leak",
       "file": "light-leak.webp",
       "preset": "runtime-default:2",
-      "sha256": "4504b3178e8c53f33dc31a645007e313da28b071e3d9094cd73629aaa1ad9939"
+      "sha256": "9e7e9f389aa05ed9b96cc2a21d95c0e3bf2c9a833f8948f4aa8289f1938f27c4"
     },
     {
       "name": "Handheld",
       "file": "handheld.webp",
-      "preset": "runtime-default:3",
-      "sha256": "dfc27d0351c626911cd95d299c9e3683eadeb9f0253f2efce83f6fe4719623c4"
+      "preset": "handheld_run",
+      "sha256": "d352a4ce407e268f35edf25a8a8cf86cb875b61bed265a0d74bf93e9a2eaaf1f"
     },
     {
       "name": "Bokeh",
       "file": "bokeh.webp",
-      "preset": "runtime-default:4",
-      "sha256": "88742bd5a5e6e62c0fab2369476ebf0bae68f8e216b732854665be95d8273a6f"
+      "preset": "bokeh_neon",
+      "sha256": "48eb9d3bd7899c4983880eff48558ea79dcd58d17251872135821b72036d8f13"
     },
     {
       "name": "Particles",
@@ -54,13 +54,13 @@
       "name": "Orton Glow",
       "file": "orton.webp",
       "preset": "runtime-default:6",
-      "sha256": "a9778822367125362f94351baf772be4e72b1c8311fd5efdcbabe8812ea23f75"
+      "sha256": "f4fe95b28d01dc3441fd9855d3da063b6d5c126d31264a1f63de2e19f96624fd"
     },
     {
       "name": "Film Grit",
       "file": "film-grit.webp",
       "preset": "runtime-default:7",
-      "sha256": "28da3f1652a574cf92e3646ca5078efedf801bcba43116ae1ba90e2cb55f32e3"
+      "sha256": "c5e2bff151d2210f52af53987aa63620caa7e282b00411ff0a893dfe92c2011c"
     },
     {
       "name": "Mirage",
@@ -71,44 +71,44 @@
     {
       "name": "Center Spot",
       "file": "center-spot.webp",
-      "preset": "runtime-default:9",
-      "sha256": "4a3d35a31ceb94b54d7e4e92cdf6e226a7b6fee2c3529b990cc93c8674338ca5"
+      "preset": "spot_tunnel",
+      "sha256": "d7345ef6d3a61e07e581a8ea1050e2bba43fc5e9780f50ee0b281a7922619257"
     },
     {
       "name": "Bloom",
       "file": "bloom.webp",
-      "preset": "runtime-default:10",
-      "sha256": "2c3d2c71e9e555a2013d7e201765dfd2d2e7d876a44b78d1076189079f7fb4d7"
+      "preset": "bloom_dusty_lens",
+      "sha256": "1c60f0366bfdb0e5a208236275657df247cad8b55a2884899afcc20ce1c609b8"
     },
     {
       "name": "Pinhole",
       "file": "pinhole.webp",
-      "preset": "runtime-default:11",
-      "sha256": "0d89f1187812764cb81625991ecc073fe43f99ad9f614e00e6dd7cee757413a6"
+      "preset": "pinhole_antique",
+      "sha256": "00afab97485a7db7f029f32ca55181a5833fc65b17982bc64e72ca4581fff193"
     },
     {
       "name": "Polaroid",
       "file": "polaroid.webp",
-      "preset": "runtime-default:12",
-      "sha256": "e3a201be06d578df74aebd493b6a224f94ecb604e92cb4e6a14f87e2b3694168"
+      "preset": "polaroid_vintage",
+      "sha256": "c51e9f678e77afb600dc94d168ac6c0a49ea4669d8cfb25e91d2da50e0c3d7a5"
     },
     {
       "name": "Daguerreotype",
       "file": "daguerreotype.webp",
-      "preset": "runtime-default:13",
-      "sha256": "b3d95b73737772f0396b1f5c56556819012e0269b1831a9f19bc305ec0d10c17"
+      "preset": "daguerre_silver",
+      "sha256": "8856451cbb55bf90c32df3f37d1bcf8ac4fbcb75bbc44ee498f6256191816db3"
     },
     {
       "name": "Technicolor 2-Strip",
       "file": "technicolor.webp",
-      "preset": "runtime-default:14",
-      "sha256": "1043937406d147b0c6af9f526c7c8cc1b80623cff349c4d0783d644be4ef80fa"
+      "preset": "technicolor_misaligned",
+      "sha256": "deed65c2f0966e14d552176721877bdf0729b5f8b3acf83734e7a3d4bf9b5e22"
     },
     {
       "name": "Wet Lens",
       "file": "wet-lens.webp",
-      "preset": "runtime-default:15",
-      "sha256": "199c420f3814db296223a139063f4f1e94cc83545d5c8a8a55e5547098559998"
+      "preset": "wet_lens_night_window",
+      "sha256": "2fe82eb8eb93e71b016eee23b9a647d5d92f1013849a9288509d66f6bf6f0c22"
     },
     {
       "name": "Phone Wet Lens",
