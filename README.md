@@ -83,6 +83,20 @@ Actual OBS renders using shipped defaults and selected presets.
 
 ## Verified GitHub Actions builds
 
+The current module name is `emulens`. The November 20 rename snapshot
+[`ebc2150`](https://github.com/myrqyry/emuLens/actions/runs/44685880736)
+passed Windows and macOS packaging, static tests and formatting, but its
+Linux build failed before module compilation because the SDK bootstrap
+flag was incorrectly capitalized. The separate
+[OBS 33.0.1 build](https://github.com/myrqyry/emuLens/actions/runs/44685880558)
+passed for that snapshot. The corrected Linux path has been qualified
+locally with the pinned OBS 32.1.0 SDK: 51 native tests passed, including
+the Wet Lens and Phone Wet GPU render checks; one optional obspython
+integration case was skipped. The staged Linux module and effect resources,
+installer regression, and source-archive exclusion canaries also passed
+locally. The corrected hosted job has not run yet.
+
+
 The public [CI workflow](https://github.com/myrqyry/emuLens/actions/workflows/ci.yml)
 builds Linux x86_64, Windows x64 and macOS packages and runs formatting,
 Python checks, installer-safety tests and Linux native/GPU render tests.
