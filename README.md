@@ -94,14 +94,16 @@ locally with the pinned OBS 32.1.0 SDK: 51 native tests passed, including
 the Wet Lens and Phone Wet GPU render checks; one optional obspython
 integration case was skipped. The staged Linux module and effect resources,
 installer regression, and source-archive exclusion canaries also passed
-locally. The corrected SDK path and newer optical changes passed local checks; hosted CI for the reconciled snapshot is not yet verified.
+locally. The reconciled snapshot `887b290` subsequently passed [all five baseline jobs](https://github.com/myrqyry/emulens/actions/runs/45908543420) and the [OBS 33.0.1 compatibility build](https://github.com/myrqyry/emulens/actions/runs/45908543329).
 
 
 The public [CI workflow](https://github.com/myrqyry/emuLens/actions/workflows/ci.yml)
 builds Linux x86_64, Windows x64 and macOS packages and runs formatting,
 Python checks, installer-safety tests and Linux native/GPU render tests.
-A separate [OBS 33 compatibility workflow](https://github.com/myrqyry/emuLens/actions/workflows/obs33-compatibility.yml)
-checks an OBS 33.0.1 build.
+The [shared OBS plugin CI workflow](https://github.com/myrqyry/emulens/actions/workflows/obs33-compatibility.yml)
+targets OBS 32.2.0 and 33.0.3 on Linux x86-64, Windows x64 and native Intel/Apple Silicon macOS.
+It produces versioned test archives and checksums; Linux retains the real GPU/native test floor.
+The original OBS 32.1.0 baseline remains intact during qualification. See [shared CI](docs/SHARED_CI.md).
 
 For the public snapshot `354c87a` (November 9, 2026), both
 workflows passed:

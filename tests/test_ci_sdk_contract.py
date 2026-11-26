@@ -60,7 +60,7 @@ assert "--target obs-frontend-api libobs-opengl" in obs33_builder, (
 )
 
 obs33_workflow = (root / ".github/workflows/obs33-compatibility.yml").read_text()
-assert "libopengl-dev" in obs33_workflow, "OBS33 Ubuntu 26.04 gate needs GLVND OpenGL development library"
+assert "myrqyry/obs-plugin-ci/.github/workflows/build.yml@70ce37b1015df80478f8ed559f5c88bf4007233f" in obs33_workflow
 
 workflow = (root / ".github/workflows/ci.yml").read_text()
 assert '.deps/lib/cmake/libobs' in workflow, "native tests must reuse the pinned CI SDK"
@@ -69,9 +69,14 @@ assert "runs-on: ubuntu-latest" not in workflow
 assert workflow.count("runs-on: ubuntu-24.04") >= 3
 
 obs33_workflow = (root / ".github/workflows/obs33-compatibility.yml").read_text()
-assert "OBS 33.0.1" in obs33_workflow
-assert "runs-on: ubuntu-26.04" in obs33_workflow
-assert "build-obs33-compat.sh" in obs33_workflow
+assert "profile: full" in obs33_workflow
+assert "driver: caller" in obs33_workflow
+assert "minimum-tests: 54" in obs33_workflow
+assert "source-package: true" in obs33_workflow
+pins = json.loads((root / ".github/scripts/obs-sdk-pins.json").read_text())
+assert pins["32.2.0"]["source_sha256"] == "c333e4a7d5c4a94c7bb4833f046368e0ac5e981fb3964ca4981b23be1dfbda4a"
+assert pins["33.0.3"]["source_sha256"] == "b0eff217a972e1dd9951ce24d66595c723dde847461b16de07eb33d75ec34659"
+assert "libobs-opengl" in (root / ".github/scripts/prepare-obs32-sdk.sh").read_text()
 windows_helpers = (root / "cmake/windows/helpers.cmake").read_text()
 assert 'DESTINATION "${target}/bin/64bit"' in windows_helpers
 assert 'DESTINATION "${target}"' in windows_helpers
