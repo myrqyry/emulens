@@ -286,6 +286,8 @@ typedef struct {
   gs_eparam_t *ghost_amount;
   gs_eparam_t *ghost_scale;
   gs_eparam_t *ghost_color;
+  gs_eparam_t *ghost_elements;
+  gs_eparam_t *ghost_dispersion;
 } bloom_params_t;
 
 typedef struct {
@@ -411,6 +413,7 @@ struct lens_data {
     gs_eparam_t *ViewProj;
     gs_eparam_t *blur_radius;
     gs_eparam_t *blurred_image;
+    gs_eparam_t *highlight_image;
   } common;
 
   // Technique handles

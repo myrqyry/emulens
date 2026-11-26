@@ -94,7 +94,7 @@ locally with the pinned OBS 32.1.0 SDK: 51 native tests passed, including
 the Wet Lens and Phone Wet GPU render checks; one optional obspython
 integration case was skipped. The staged Linux module and effect resources,
 installer regression, and source-archive exclusion canaries also passed
-locally. The corrected hosted job has not run yet.
+locally. The corrected SDK path and newer optical changes passed local checks; hosted CI for the reconciled snapshot is not yet verified.
 
 
 The public [CI workflow](https://github.com/myrqyry/emuLens/actions/workflows/ci.yml)
@@ -337,7 +337,7 @@ python3 tests/test_mirage_radius_bounds.py
 python3 tests/test_vidicon_reference_model.py
 ```
 
-The earlier public v0.5.0 snapshot passed 50 of 51 registered tests (one optional OBS Python test skipped). The latest defaults pass is separately checked locally; see the test instructions above.
+The November 26 optical reconciliation passed 53 of 54 registered CTest entries on Linux, including real OBS/OpenGL Wet Lens, Phone Wet Lens and optical flare pixel tests. `PythonIntegrationTest` skipped because `obspython` was unavailable. Six isolated installer-safety tests also passed. This is not full GUI, streaming-performance, or cross-platform runtime qualification.
 
 ## Architecture
 

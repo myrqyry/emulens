@@ -93,11 +93,13 @@ jobs:
           printf '%s\n' "$listed" | grep -F 'WetLensGpuRenderTest' > /dev/null
           printf '%s\n' "$listed" | grep -F 'PhoneWetGpuRenderTest' > /dev/null
           printf '%s\n' "$listed" | grep -F 'MemLeakTest' > /dev/null
+          printf '%s\n' "$listed" | grep -F 'OpticalFlareGpuRenderTest' > /dev/null
+          printf '%s\n' "$listed" | grep -F 'OpticalFlareContractTest' > /dev/null
           ctest --test-dir tests/build/tests --output-on-failure --no-tests=error --output-junit "$RUNNER_TEMP/emulens-ctest.xml"
           python3 - "$RUNNER_TEMP/emulens-ctest.xml" <<'PYTEST'
           import sys, xml.etree.ElementTree as ET
           cases = ET.parse(sys.argv[1]).findall(".//testcase")
-          assert len(cases) >= 52, "Incomplete native suite"
+          assert len(cases) >= 54, "Incomplete native suite"
           skipped = {c.get("name") for c in cases if c.find("skipped") is not None or c.get("status") in ("notrun", "disabled")}
           assert skipped <= {"PythonIntegrationTest"}, f"Unexpected skipped tests: {skipped}"
           print(f"{len(cases)} cases; permitted optional skips: {sorted(skipped)}")

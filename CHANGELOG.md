@@ -24,6 +24,19 @@
 
 ### Rendering and optical behavior
 
+- Bloom's internal lens ghosts now use the existing bright-pass texture to
+  form multiple signed optical-axis reflections, with bounded pupil falloff
+  and wavelength-inspired color coatings. Ghost Amount/Scale/Tint remain
+  backward-compatible; new Lens Elements and Ghost Color Dispersion controls
+  are explicitly saved in all Bloom presets.
+- Starburst's existing chroma setting now colors accumulated highlight rays
+  rather than re-sampling the composited image. Ray width geometry is
+  calculated once per axis, avoiding redundant inner-loop work.
+- Real isolated OBS/OpenGL shader pixel tests cover distinct reflections,
+  dispersion, Starburst ray colors, dark-scene neutrality, and source alpha.
+  Streaming GPU frame time, HDR compositing, and Windows/macOS visual parity
+  remain unverified.
+
 - Added **Phone Wet Lens** as a separate seventeenth effect mode: broad
   near-lens water contours, live-image refraction, highlight-driven
   directional ribbons and localized veiling glare. Existing Wet Lens

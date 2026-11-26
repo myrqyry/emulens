@@ -39,7 +39,8 @@ the frame:
   the optical-surface pattern.
 - **Refraction Amount / Refraction Scale** — chromatic/light displacement driven
   by the local gradient of the contamination pattern.
-- **Ghost Amount / Scale / Color** — internal lens reflections.
+- **Ghost Amount / Scale / Tint** — axis-centered reflections of extracted highlights.
+- **Lens Elements / Ghost Color Dispersion** — adjust the number of optical reflections (1–6) and their spectral coloration.
 - **Anamorphic** — stretched optical response for streak-like bloom.
 - **Highlights Only** — restricts the combine toward extracted highlights.
 
@@ -69,9 +70,9 @@ annulus.
 Starburst ray reach is driven by highlight energy. Strong point highlights
 produce longer/brighter rays while weaker highlights fall off instead of being
 allowed to smear farther through a distance-lowered threshold. Point count,
-rotation, ray length, thickness, smoothness, chromatic aberration, pulse,
+rotation, ray length, thickness, smoothness, Ray Color Dispersion, pulse,
 anamorphic mode, colorization, samples, and blend mode remain independently
-tunable.
+tunable. Spectral color affects the captured highlight rays, not the original image.
 
 ### Mirage
 

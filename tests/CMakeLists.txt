@@ -229,6 +229,12 @@ add_test(
 )
 
 add_test(
+    NAME OpticalFlareContractTest
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_optical_flare_contract.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..
+)
+
+add_test(
     NAME PresetTuningTest
     COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_preset_tuning.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..
@@ -495,5 +501,16 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
                 "$<TARGET_FILE:emulens>"
                 "${CMAKE_CURRENT_SOURCE_DIR}/../data")
         set_tests_properties(PhoneWetGpuRenderTest PROPERTIES TIMEOUT 30)
+        add_executable(test_optical_flare_gpu test_optical_flare_gpu.cpp)
+        target_include_directories(test_optical_flare_gpu PRIVATE ${OBS_INCLUDE_DIRS})
+        target_link_libraries(test_optical_flare_gpu PRIVATE ${OBS_LIBRARIES})
+        add_test(NAME OpticalFlareGpuRenderTest
+            COMMAND ${EMULENS_XVFB_RUN} -a -s
+                "-screen 0 1280x720x24"
+                "$<TARGET_FILE:test_optical_flare_gpu>"
+                "${CMAKE_CURRENT_SOURCE_DIR}/../data/emulens.effect"
+                "$<TARGET_FILE:emulens>"
+                "${CMAKE_CURRENT_SOURCE_DIR}/../data")
+        set_tests_properties(OpticalFlareGpuRenderTest PROPERTIES TIMEOUT 30)
     endif()
 endif()

@@ -444,10 +444,10 @@ static void add_starburst_properties(obs_properties_t *props) {
                                      obs_module_text("RayColor"));
   obs_property_set_long_description(p, obs_module_text("RayColorTooltip"));
   p = obs_properties_add_float_slider(props, P_SB_CHROMA,
-                                      obs_module_text("ChromaticAberration"),
+                                      obs_module_text("StarburstSpectralColor"),
                                       0.0, 2.0, 0.05);
   obs_property_set_long_description(
-      p, obs_module_text("ChromaticAberrationTooltip"));
+      p, obs_module_text("StarburstSpectralColorTooltip"));
 
   section_header(props, "Animation");
   p = obs_properties_add_float_slider(
@@ -921,6 +921,15 @@ static void add_bloom_properties(obs_properties_t *props) {
   p = obs_properties_add_color_alpha(props, P_BLOOM_GHOST_COLOR,
                                      obs_module_text("GhostColor"));
   obs_property_set_long_description(p, obs_module_text("GhostColorTooltip"));
+  p = obs_properties_add_int_slider(props, P_BLOOM_GHOST_ELEMENTS,
+                                    obs_module_text("GhostElements"), 1, 6, 1);
+  obs_property_set_long_description(p,
+                                    obs_module_text("GhostElementsTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_BLOOM_GHOST_DISPERSION, obs_module_text("GhostDispersion"), 0.0,
+      1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("GhostDispersionTooltip"));
 
   section_header(props, "Advanced");
   p = obs_properties_add_float_slider(

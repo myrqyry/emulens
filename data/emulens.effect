@@ -14,6 +14,8 @@ uniform texture2d image;
 uniform texture2d history_image;
 /** @brief Blurred texture for Orton/Bokeh */
 uniform texture2d blurred_image;
+/** @brief Bright-pass radiance for optical lens reflections */
+uniform texture2d highlight_image;
 
 /** @brief Time elapsed in seconds */
 uniform float elapsed_time = 0.0;
@@ -431,6 +433,7 @@ float4 PSStarburst(VertData v_in) : TARGET {
     }
     float current_ray_len = sb_ray_length * (1.0 + pulse);
     float total_accum = 0.0;
+    float3 spectralAccum = float3(0.0, 0.0, 0.0);
 
     int points = f2i(sb_points);
     if (points < 2) points = 2;
@@ -450,6 +453,10 @@ float4 PSStarburst(VertData v_in) : TARGET {
         if (sb_anamorphic > 0.5) dir.y *= 0.5;
 
         float ray_accum = 0.0;
+        // Perpendicular sampling geometry is constant along each ray.
+        float2 perp = normalize(float2(-dir.y, dir.x));
+        float2 width_offset = perp * sb_thickness *
+                              float2(uv_pixel_interval.x, uv_pixel_interval.y);
         for (int j = 1; j <= MAX_SAMPLES; j++) {
             if (j > samples) break;
             float scale = float(j) / float(samples);
@@ -458,8 +465,6 @@ float4 PSStarburst(VertData v_in) : TARGET {
 
             float4 samp = image.Sample(textureSampler, sample_pos);
             float samp_luma = dot(samp.rgb, float3(0.299, 0.587, 0.114));
-            float2 perp = normalize(float2(-dir.y, dir.x));
-            float2 width_offset = perp * sb_thickness * float2(uv_pixel_interval.x, uv_pixel_interval.y);
             float2 width_pos = sample_pos + width_offset;
             if (width_pos.x >= 0.0 && width_pos.x <= 1.0 && width_pos.y >= 0.0 && width_pos.y <= 1.0) {
                 samp_luma = max(samp_luma, dot(image.Sample(textureSampler, width_pos).rgb, float3(0.299, 0.587, 0.114)));
@@ -480,22 +485,30 @@ float4 PSStarburst(VertData v_in) : TARGET {
                 pow(max(0.0, 1.0 - scale), max(0.5, sb_smoothness * 0.55));
             ray_accum += excess * reach_fade * distance_falloff;
         }
-        total_accum += ray_accum / float(samples);
+        float rayEnergy = ray_accum / float(samples);
+        total_accum += rayEnergy;
+        if (sb_chroma > 0.001 && sb_colorize < 0.5) {
+            // Spectral coating modulates the actual rays that collected bright
+            // light, not a displaced sample of the composited output pixel.
+            // This adds no source texture taps and respects ray orientation.
+            float phase = angle * 1.7 + current_ray_len * 5.0;
+            float3 coating = 0.72 + 0.28 * cos(phase -
+                                float3(0.0, 2.094395, 4.188790));
+            spectralAccum += rayEnergy *
+                             lerp(float3(1.0, 1.0, 1.0), coating,
+                                  saturate(sb_chroma * 0.50));
+        }
     }
 
+    float rawEnergy = total_accum;
     total_accum = saturate(total_accum / (sqrt(float(points)) * 0.5 + 0.1));
     float mix_factor = total_accum * sb_intensity;
 
     float3 final_rgb = original.rgb;
     if (mix_factor > 0.001) {
         float3 ray_rgb = float3(1.0, 1.0, 1.0);
-        if (sb_chroma > 0.0 && sb_colorize < 0.5) {
-             float chroma_dist = sb_chroma * 0.02 * mix_factor;
-             float2 to_pixel = v_in.uv - 0.5;
-             float r = image.Sample(textureSampler, v_in.uv - to_pixel * chroma_dist).r;
-             float g = image.Sample(textureSampler, v_in.uv).g;
-             float b = image.Sample(textureSampler, v_in.uv + to_pixel * chroma_dist).b;
-             ray_rgb = float3(r, g, b);
+        if (sb_chroma > 0.001 && sb_colorize < 0.5) {
+            ray_rgb = spectralAccum / max(rawEnergy, 0.0001);
         } else if (sb_colorize > 0.5) {
             ray_rgb = sb_color.rgb;
         }
@@ -1068,6 +1081,8 @@ uniform float bloom_dust_specular = 0.20;
 uniform float bloom_dust_depth_layers = 2.0;
 uniform float bloom_ghost_amount = 0.0;
 uniform float bloom_ghost_scale = 2.0;
+uniform float bloom_ghost_elements = 4.0;
+uniform float bloom_ghost_dispersion = 0.25;
 uniform float4 bloom_ghost_color = {1.0, 1.0, 1.0, 1.0};
 
 
@@ -1325,22 +1340,60 @@ float4 PSBloomCombine(VertData v_in) : TARGET {
         }
     }
 
-    // --- Layer 3: Ghost Reflections ---
+    // --- Layer 3: Internal lens reflections from threshold-extracted light ---
+    // Image-space transformations map a visible output pixel back to a
+    // bright source location. Signed magnifications give ghosts on both sides
+    // of the optical axis, rather than offsetting a blurred copy of the frame.
     if (bloom_ghost_amount > 0.001) {
-        float2 center_uv = v_in.uv - 0.5;
-        float dist = length(center_uv);
-        if (dist > 0.001) {
-            float2 norm_dir = center_uv / dist;
-            float2 ghost_uv = v_in.uv - norm_dir * bloom_ghost_scale * uv_pixel_interval.xy * 80.0;
+        float2 opticalCenter = float2(0.5, 0.5);
+        float2 lensCoord = v_in.uv - opticalCenter;
+        float aspect = uv_pixel_interval.y / max(uv_pixel_interval.x, 0.000001);
+        int elements = clamp(int(bloom_ghost_elements + 0.5), 1, 6);
+        float3 ghostAccum = float3(0.0, 0.0, 0.0);
 
-            if (ghost_uv.x > 0.0 && ghost_uv.x < 1.0 && ghost_uv.y > 0.0 && ghost_uv.y < 1.0) {
-                float r = blurred_image.Sample(textureSampler, ghost_uv + float2(1.4, 0.0) * uv_pixel_interval.xy * bloom_ghost_scale * 10.0).r;
-                float g = blurred_image.Sample(textureSampler, ghost_uv).g;
-                float b = blurred_image.Sample(textureSampler, ghost_uv - float2(1.4, 0.0) * uv_pixel_interval.xy * bloom_ghost_scale * 10.0).b;
-                float3 ghost = float3(r, g, b) * bloom_ghost_color.rgb * bloom_ghost_amount * 0.3;
-                final_rgb += ghost;
+        for (int i = 0; i < 6; i++) {
+            if (i >= elements) break;
+            float fi = float(i);
+            float reflectionSign = (i == 0 || i == 2 || i == 4) ? -1.0 : 1.0;
+            float magnification = reflectionSign * (0.48 + fi * 0.24) *
+                                  (2.0 / max(bloom_ghost_scale, 0.1));
+            float2 ghostUV = opticalCenter + lensCoord * magnification;
+            float field = length((ghostUV - opticalCenter) * float2(aspect, 1.0));
+            float pupil = saturate(1.0 - field * 0.9);
+            pupil *= pupil;
+
+            // Early reject outside the source; never repeat edge texels.
+            if (ghostUV.x < 0.0 || ghostUV.x > 1.0 ||
+                ghostUV.y < 0.0 || ghostUV.y > 1.0)
+                continue;
+
+            float3 ghostLight;
+            if (bloom_ghost_dispersion > 0.001) {
+                float2 shift = (ghostUV - opticalCenter) *
+                               bloom_ghost_dispersion * (0.012 + fi * 0.005);
+                float red = highlight_image.Sample(textureSampler,
+                                                   saturate(ghostUV - shift)).r;
+                float green = highlight_image.Sample(textureSampler, ghostUV).g;
+                float blue = highlight_image.Sample(textureSampler,
+                                                    saturate(ghostUV + shift * 1.18)).b;
+                ghostLight = float3(red, green, blue);
+
+                // RGB wavelengths approximate coating response; deliberately
+                // restrained instead of claiming full physical lens tracing.
+                float phase = fi * 0.37 + field * 0.85;
+                float3 coating = 0.77 + 0.23 * cos(6.2831853 * phase *
+                                         float3(1.0, 1.22, 1.41));
+                ghostLight *= lerp(float3(1.0, 1.0, 1.0), coating,
+                                    saturate(bloom_ghost_dispersion * 0.8));
+            } else {
+                ghostLight = highlight_image.Sample(textureSampler, ghostUV).rgb;
             }
+            ghostAccum += ghostLight * (pupil / (1.0 + fi * 0.7));
         }
+
+        ghostAccum /= sqrt(float(elements));
+        final_rgb += ghostAccum *
+                     (bloom_ghost_color.rgb * bloom_ghost_amount * 0.38);
     }
 
     float3 guard = ForceUniformUsageRGB();

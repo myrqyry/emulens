@@ -32,6 +32,10 @@ void bloom_cache(struct lens_data *filter, gs_effect_t *effect) {
                  P_BLOOM_GHOST_SCALE);
   GET_PARAM_SAFE(filter->mode_params.bloom.ghost_color, effect,
                  P_BLOOM_GHOST_COLOR);
+  GET_PARAM_SAFE(filter->mode_params.bloom.ghost_elements, effect,
+                 P_BLOOM_GHOST_ELEMENTS);
+  GET_PARAM_SAFE(filter->mode_params.bloom.ghost_dispersion, effect,
+                 P_BLOOM_GHOST_DISPERSION);
 }
 
 void bloom_update(struct lens_data *filter, obs_data_t *settings) {
@@ -78,6 +82,10 @@ void bloom_update(struct lens_data *filter, obs_data_t *settings) {
   struct vec4 ghost_c_vec;
   emulens_color_to_vec4(&ghost_c_vec, ghost_c_val);
   SET_PARAM_VEC4(filter->mode_params.bloom.ghost_color, &ghost_c_vec);
+  SET_CLAMPED_INT_AS_FLOAT(filter->mode_params.bloom.ghost_elements, settings,
+                           P_BLOOM_GHOST_ELEMENTS, 1, 6);
+  SET_CLAMPED_DOUBLE(filter->mode_params.bloom.ghost_dispersion, settings,
+                     P_BLOOM_GHOST_DISPERSION, 0.0f, 1.0f);
 
   filter->runtime_state.bloom.radius =
       (float)obs_data_get_double(settings, P_BLOOM_RADIUS);
@@ -306,6 +314,7 @@ gs_texture_t *bloom_render(struct lens_data *filter, gs_effect_t *effect,
   rebind_current_settings(filter);
 
   SET_PARAM_TEXTURE(filter->common.blurred_image, blurred);
+  SET_PARAM_TEXTURE(filter->common.highlight_image, extracted);
 
   pass_ok = lens_run_technique_quad(filter->tech.bloom_combine, width, height);
   gs_texrender_end(output_buf);
@@ -337,6 +346,8 @@ void bloom_get_defaults(obs_data_t *settings) {
   obs_data_set_default_double(settings, P_BLOOM_GHOST_AMOUNT, 0.0);
   obs_data_set_default_double(settings, P_BLOOM_GHOST_SCALE, 2.0);
   obs_data_set_default_int(settings, P_BLOOM_GHOST_COLOR, 0xFFFFFFFF);
+  obs_data_set_default_int(settings, P_BLOOM_GHOST_ELEMENTS, 4);
+  obs_data_set_default_double(settings, P_BLOOM_GHOST_DISPERSION, 0.25);
 }
 
 void bloom_populate_presets(obs_property_t *list) {

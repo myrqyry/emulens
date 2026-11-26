@@ -618,6 +618,8 @@ static void recache_params_after_compile(struct lens_data *filter) {
   GET_PARAM_SAFE(filter->common.main_tex, filter->effect, "image");
   GET_PARAM_SAFE(filter->common.blur_radius, filter->effect, "val_blur_radius");
   GET_PARAM_SAFE(filter->common.blurred_image, filter->effect, "blurred_image");
+  GET_PARAM_SAFE(filter->common.highlight_image, filter->effect,
+                 "highlight_image");
   GET_PARAM_SAFE(filter->common.noise_tex, filter->effect, "noise_tex");
 
   int active_mode = (int)emulens_atomic_load(&filter->mode);
@@ -781,6 +783,8 @@ static void *lens_create(obs_data_t *settings, obs_source_t *context) {
       gs_effect_get_param_by_name(filter->effect, "image");
   filter->common.blurred_image =
       gs_effect_get_param_by_name(filter->effect, "blurred_image");
+  filter->common.highlight_image =
+      gs_effect_get_param_by_name(filter->effect, "highlight_image");
   filter->common.noise_tex =
       gs_effect_get_param_by_name(filter->effect, "noise_tex");
   filter->common.elapsed_time =
@@ -828,6 +832,7 @@ static void *lens_create(obs_data_t *settings, obs_source_t *context) {
   } while (0)
         WARMUP_BIND_TEX(filter->common.main_tex);
         WARMUP_BIND_TEX(filter->common.blurred_image);
+        WARMUP_BIND_TEX(filter->common.highlight_image);
         WARMUP_BIND_TEX(filter->common.noise_tex);
         gs_eparam_t *warmup_history =
             gs_effect_get_param_by_name(filter->effect, "history_image");

@@ -116,6 +116,8 @@
 #define P_BLOOM_GHOST_AMOUNT "bloom_ghost_amount"
 #define P_BLOOM_GHOST_SCALE "bloom_ghost_scale"
 #define P_BLOOM_GHOST_COLOR "bloom_ghost_color"
+#define P_BLOOM_GHOST_ELEMENTS "bloom_ghost_elements"
+#define P_BLOOM_GHOST_DISPERSION "bloom_ghost_dispersion"
 
 
 // Wet Lens: separate optically motivated droplet mode, appended so existing
