@@ -42,6 +42,8 @@ jobs:
           python3 .github/scripts/check_readme_links.py README.md
       - name: Verify deterministic Linux OBS SDK
         run: python3 tests/test_ci_sdk_contract.py
+      - name: Verify shared package contract
+        run: python3 tests/test_shared_ci.py
       - name: Run Python tests
         run: python3 tests/test_shader_syntax.py
       - name: Run render pipeline tests

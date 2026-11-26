@@ -99,7 +99,9 @@ function(set_target_properties_plugin target)
         "${CMAKE_CURRENT_BINARY_DIR}/create-package.cmake"
         @ONLY
     )
-    install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/create-package.cmake")
+    if(NOT EMULENS_EXTERNAL_SDK)
+        install(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/create-package.cmake")
+    endif()
 endfunction()
 
 # target_install_resources: Helper function to add resources into bundle

@@ -20,7 +20,7 @@ BLOCKED = (
 
 
 def verify(archive):
-    with tarfile.open(archive, "r:xz") as bundle:
+    with tarfile.open(archive, "r:*") as bundle:
         members = [tuple(PurePosixPath(m.name).parts[1:]) for m in bundle.getmembers()]
     if not members:
         raise ValueError("Empty source archive")
@@ -39,7 +39,7 @@ def verify(archive):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        raise SystemExit("Usage: check_source_archive.py <archive.tar.xz>")
+        raise SystemExit("Usage: check_source_archive.py <source archive>")
     try:
         verify(sys.argv[1])
     except (ValueError, tarfile.TarError) as ex:
