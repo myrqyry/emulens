@@ -76,7 +76,7 @@ Actual OBS renders using shipped defaults and selected presets.
 
 ## Features
 
-- 17 real-time optical, camera and film effects with 61 presets.
+- 19 real-time optical, camera and film effects with 72 presets.
 - GPU-native rendering, including multipass bloom and time-dependent Vidicon trails.
 - Clear starting points with per-effect controls; no external optical-overlay assets.
 - Works with upstream OBS filters, including scaling and cropping.
@@ -236,7 +236,7 @@ still needs runtime verification on those platforms. Restart OBS afterward.
 | **Bokeh / Tilt-Shift** | Shallow depth-of-field with configurable focus region, highlight response, and 3–8 sided aperture shapes | **Bokeh: Natural**, Bokeh: Center Focus, Bokeh: Soft Focus, Bokeh: Night Lights |
 | **Particles** | Floating dust, snow, and motes with source influence, focus shaping, polygonal particles, chromatic separation, and size-aware energy | **Particles: Natural**, Particles: Dust, Particles: Prism Motes, Particles: Snow |
 | **Orton Glow** | Soft-focus photographic glow with blur, contrast, brightness, saturation, highlight boost, and blend modes | **Orton: Soft Print**, Orton: Veil, Orton: Dream Print, Orton: Velvet |
-| **Film Grit** | Film-stock dirt, scratches, grain, flashes, instability, tone controls, scratch types, and blend modes | **Grit: Fine Stock**, Grit: 1920s, Grit: Worn Print, Grit: Projector |
+| **Film Grit** | Film-stock dirt, scratches, grain, flashes, instability, tone controls, scratch types, blend modes and optional highlight-driven halation | **Grit: Fine Stock**, Grit: 1920s, Grit: Worn Print, Grit: Projector, Grit: Halation Stock |
 | **Mirage** | Layered mirrored/kaleidoscopic image echoes; large radius values reflect at image bounds instead of dropping samples to black | **Mirage: Glass Echo**, Mirage: Kaleidoscope, Mirage: Double Vision, Mirage: Split |
 | **Center Spot** | Clear center with an optical outer ring: Soft Diffusion, Diopter, or Radial Zoom | **Spot: Soft Spot**, Spot: Diopter, Spot: Diffusion, Spot: Radial Zoom |
 | **Bloom / Glow** | Multi-level bright-pass bloom with optional fixed lens contamination that scatters, veils, glints, refracts, ghosts, and supports anamorphic response | **Bloom: Clean Highlights**, Bloom: Halation, Bloom: Dusty Lens, Bloom: Night Glass, Bloom: Coated Glass |
@@ -246,6 +246,8 @@ still needs runtime verification on those platforms. Restart OBS afterward.
 | **Technicolor 2-Strip** | Restricted red/cyan dye-transfer character with saturation, strip offset, and glow | **Technicolor: Balanced Two-Strip**, Technicolor: Two-Strip Print, Technicolor: Registration Slip |
 | **Wet Lens** | Stationary water-bead refraction of captured live pixels, with light-gathering glints | **Clean Raindrops**, Night Window |
 | **Phone Wet Lens** | Broad near-lens refraction regions, captured-light ribbons and veiling glare | **Wet Phone Camera**, Rain on Streetlights, Heavy Wet Optics |
+| **Cinema Diffusion** | Separate detail softening and thresholded highlight scatter; five optical-inspired profiles including a fixed weave | **Diffusion: Pro-Mist**, Diffusion: Black Pro-Mist, Diffusion: Satin, Diffusion: Digital Diffusion, Diffusion: Black Net |
+| **Diopter** | Movable, rotatable full/split/strip/letterbox glass mask with local defocus, magnification and chromatic fringe | **Diopter: Split Field**, Diopter: Full Field, Diopter: Strip, Diopter: Letterbox, Diopter: Rotated Split |
 
 **Bold** preset names are the defaults. All names above match the OBS preset menu.
 
@@ -354,7 +356,7 @@ emulens uses a strategy-per-effect architecture.
   selection, and control ranges.
 - **Shaders** (`data/emulens.effect`) — effect uniforms and the 22 cached
   techniques used by the strategies.
-- **Presets** (`data/presets/`) — 61 JSON files: 17 defaults + 44 alternates.
+- **Presets** (`data/presets/`) — 72 JSON files: 19 defaults + 53 alternates.
 - **Localization** (`data/locale/`) — property labels, tooltips, mode names,
   preset names, and descriptions.
 - **Tests** (`tests/`) — shader/static contracts, reference models, resource
@@ -394,3 +396,5 @@ emulens is licensed under the GNU General Public License version 2 or later
 ## Credits
 
 Developed for the OBS Studio community.
+
+Film Grit includes an opt-in, highlight-driven film-halation control and Halation Stock preset. Existing Grit presets retain their appearance (halation off).

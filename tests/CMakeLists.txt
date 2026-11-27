@@ -366,6 +366,8 @@ set(STRATEGY_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/strategies/strategy-technicolor.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/strategies/strategy-wet-lens.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/strategies/strategy-phone-wet.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/strategies/strategy-diffusion.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/strategies/strategy-diopter.c
 )
 
 set(PLUGIN_SOURCES
@@ -512,5 +514,21 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
                 "$<TARGET_FILE:emulens>"
                 "${CMAKE_CURRENT_SOURCE_DIR}/../data")
         set_tests_properties(OpticalFlareGpuRenderTest PROPERTIES TIMEOUT 30)
+        add_executable(test_halation_gpu test_halation_gpu.cpp)
+        target_include_directories(test_halation_gpu PRIVATE ${OBS_INCLUDE_DIRS})
+        target_link_libraries(test_halation_gpu PRIVATE ${OBS_LIBRARIES})
+        add_test(NAME HalationGpuRenderTest COMMAND ${EMULENS_XVFB_RUN} -a
+            "$<TARGET_FILE:test_halation_gpu>" "${CMAKE_CURRENT_SOURCE_DIR}/../data/emulens.effect"
+            "$<TARGET_FILE:emulens>" "${CMAKE_CURRENT_SOURCE_DIR}/../data")
+        set_tests_properties(HalationGpuRenderTest PROPERTIES TIMEOUT 30)
+        add_executable(test_recovered_optics_gpu test_recovered_optics_gpu.cpp)
+        target_include_directories(test_recovered_optics_gpu PRIVATE ${OBS_INCLUDE_DIRS})
+        target_link_libraries(test_recovered_optics_gpu PRIVATE ${OBS_LIBRARIES})
+        add_test(NAME RecoveredOpticsGpuRenderTest COMMAND ${EMULENS_XVFB_RUN} -a
+            "$<TARGET_FILE:test_recovered_optics_gpu>" "${CMAKE_CURRENT_SOURCE_DIR}/../data/emulens.effect"
+            "$<TARGET_FILE:emulens>" "${CMAKE_CURRENT_SOURCE_DIR}/../data")
+        set_tests_properties(RecoveredOpticsGpuRenderTest PROPERTIES TIMEOUT 60)
+
+
     endif()
 endif()

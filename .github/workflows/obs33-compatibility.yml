@@ -21,5 +21,5 @@ jobs:
       module: emulens
       profile: full
       driver: caller
-      minimum-tests: 54
+      minimum-tests: 56
       source-package: true

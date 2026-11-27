@@ -15,6 +15,11 @@ void grit_cache(struct lens_data *filter, gs_effect_t *effect) {
   GET_PARAM_SAFE(filter->mode_params.grit.blend_mode, effect, P_GRIT_BLEND_MODE);
   GET_PARAM_SAFE(filter->mode_params.grit.scratch_type, effect, P_GRIT_SCRATCH_TYPE);
   GET_PARAM_SAFE(filter->mode_params.grit.dust_size, effect, P_GRIT_DUST_SIZE);
+  GET_PARAM_SAFE(filter->mode_params.grit.halation, effect, P_GRIT_HALATION);
+  GET_PARAM_SAFE(filter->mode_params.grit.halation_radius, effect,
+                 P_GRIT_HALATION_RADIUS);
+  GET_PARAM_SAFE(filter->mode_params.grit.halation_threshold, effect,
+                 P_GRIT_HALATION_THRESHOLD);
 }
 
 void grit_update(struct lens_data *filter, obs_data_t *settings) {
@@ -46,6 +51,12 @@ void grit_update(struct lens_data *filter, obs_data_t *settings) {
                      P_GRIT_SCRATCH_TYPE, 0.0f, 2.0f);
   SET_CLAMPED_DOUBLE(filter->mode_params.grit.dust_size, settings,
                      P_GRIT_DUST_SIZE, 0.1f, 5.0f);
+  SET_CLAMPED_DOUBLE(filter->mode_params.grit.halation, settings,
+                     P_GRIT_HALATION, 0.0f, 1.0f);
+  SET_CLAMPED_DOUBLE(filter->mode_params.grit.halation_radius, settings,
+                     P_GRIT_HALATION_RADIUS, 0.0f, 20.0f);
+  SET_CLAMPED_DOUBLE(filter->mode_params.grit.halation_threshold, settings,
+                     P_GRIT_HALATION_THRESHOLD, 0.0f, 1.0f);
 }
 
 gs_texture_t *grit_render(struct lens_data *filter, gs_effect_t *effect,
@@ -74,6 +85,9 @@ void grit_get_defaults(obs_data_t *settings) {
   obs_data_set_default_int(settings, P_GRIT_COLOR, 0xFF888888);
   obs_data_set_default_int(settings, P_GRIT_SCRATCH_TYPE, 1);
   obs_data_set_default_double(settings, P_GRIT_DUST_SIZE, 0.8);
+  obs_data_set_default_double(settings, P_GRIT_HALATION, 0.0);
+  obs_data_set_default_double(settings, P_GRIT_HALATION_RADIUS, 6.0);
+  obs_data_set_default_double(settings, P_GRIT_HALATION_THRESHOLD, 0.78);
 }
 
 void grit_populate_presets(obs_property_t *list) {
@@ -85,4 +99,6 @@ void grit_populate_presets(obs_property_t *list) {
                     "GritGrindDesc");
   ADD_PRESET_ENTRY(list, "GritProjector", "grit_projector",
                     "GritProjectorDesc");
+  ADD_PRESET_ENTRY(list, "GritHalation", "grit_halation_stock",
+                    "GritHalationDesc");
 }

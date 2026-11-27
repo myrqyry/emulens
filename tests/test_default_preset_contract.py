@@ -26,6 +26,8 @@ DEFAULTS = {
     "default_technicolor.json": ("strategy-technicolor.c", 14),
     "default_wet_lens.json": ("strategy-wet-lens.c", 15),
     "default_phone_wet.json": ("strategy-phone-wet.c", 16),
+    "default_diffusion.json": ("strategy-diffusion.c", 17),
+    "default_diopter.json": ("strategy-diopter.c", 18),
 }
 
 # These persisted settings intentionally remain wired for backward compatibility

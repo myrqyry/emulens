@@ -164,7 +164,7 @@ def main():
         report = work / "ctest.xml"
         run("ctest", "--test-dir", build / "tests", "--output-on-failure", "--no-tests=error", "--output-junit", report, env=env)
         cases = ET.parse(report).findall(".//testcase")
-        required = {"WetLensGpuRenderTest", "PhoneWetGpuRenderTest", "MemLeakTest", "OpticalFlareGpuRenderTest", "OpticalFlareContractTest"}
+        required = {"WetLensGpuRenderTest", "PhoneWetGpuRenderTest", "MemLeakTest", "OpticalFlareGpuRenderTest", "OpticalFlareContractTest", "HalationGpuRenderTest", "RecoveredOpticsGpuRenderTest"}
         skipped = {c.get("name") for c in cases if c.find("skipped") is not None or c.get("status") in ("notrun", "disabled")}
         if len(cases) < int(os.environ["MINIMUM_TESTS"]) or not required <= {c.get("name") for c in cases} or skipped - {"PythonIntegrationTest"} or any(c.find("failure") is not None or c.find("error") is not None for c in cases):
             raise RuntimeError("Incomplete native/GPU suite")

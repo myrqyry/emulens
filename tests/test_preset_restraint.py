@@ -20,10 +20,10 @@ def main() -> int:
     failures: list[str] = []
 
     defaults = sorted(PRESETS.glob("default_*.json"))
-    require(len(defaults) == 17, "there must be exactly one default preset per mode", failures)
+    require(len(defaults) == 19, "there must be exactly one default preset per mode", failures)
     require(
-        {json.loads(p.read_text())["mode"] for p in defaults} == set(range(17)),
-        "default presets must cover all 17 modes exactly once",
+        {json.loads(p.read_text())["mode"] for p in defaults} == set(range(19)),
+        "default presets must cover all 19 modes exactly once",
         failures,
     )
 

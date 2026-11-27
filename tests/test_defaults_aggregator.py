@@ -66,13 +66,13 @@ def check():
     else:
         errors.append("NUM_MODES not defined")
 
-    # 7. X-macro in EMULENS_MODES has 15 entries (excluding comment lines)
+    # 7. X-macro in EMULENS_MODES has 19 entries (excluding comment lines)
     mode_lines = [line for line in params.split('\n')
-                  if re.search(r'X\([A-Z]+,', line) and not line.strip().startswith('//')]
-    if len(mode_lines) == 15:
+                  if re.search(r'X\([A-Z_]+,', line) and not line.strip().startswith('//')]
+    if len(mode_lines) == 19:
         print(f"  PASS: EMULENS_MODES has {len(mode_lines)} entries")
     else:
-        errors.append(f"EMULENS_MODES has {len(mode_lines)} entries, expected 15")
+        errors.append(f"EMULENS_MODES has {len(mode_lines)} entries, expected 19")
 
     # 8. All get_defaults functions are declared via the X-macro expansion in strategies.h
     strat_h_path = os.path.join(REPO, "src", "strategies", "strategies.h")

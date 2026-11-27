@@ -85,7 +85,9 @@
   X(DAGUERRE, daguerreotype, "Daguerreotype", "DrawDaguerreotype")              \
   X(TECHNICOLOR, technicolor, "Technicolor", "DrawTechnicolor")              \
   X(WET_LENS, wet_lens, "Wet Lens", "DrawWetLens")                       \
-  X(PHONE_WET, phone_wet, "Phone Wet Lens", "DrawPhoneWet")
+  X(PHONE_WET, phone_wet, "Phone Wet Lens", "DrawPhoneWet") \
+  X(DIFFUSION, diffusion, "Cinema Diffusion", "DrawDiffusion") \
+  X(DIOPTER, diopter, "Diopter", "DrawDiopter")
 // -------------------------------------------------------------------------------------------------
 // #2 - Shader Parameter Constants
 // -------------------------------------------------------------------------------------------------
@@ -142,6 +144,28 @@
 #define P_PHONE_ANGLE "phone_angle"
 #define P_PHONE_SEED "phone_seed"
 
+
+// Cinema diffusion params
+#define P_DIFF_TYPE "diff_type"
+#define P_DIFF_STRENGTH "diff_strength"
+#define P_DIFF_RADIUS "diff_radius"
+#define P_DIFF_HALATION "diff_halation"
+#define P_DIFF_CONTRAST "diff_contrast"
+#define P_DIFF_WARMTH "diff_warmth"
+#define P_DIFF_HIGHLIGHT_THRESHOLD "diff_highlight_threshold"
+#define P_DIFF_NET_DENSITY "diff_net_density"
+#define P_DIFF_NET_ANGLE "diff_net_angle"
+
+// Diopter params
+#define P_DIO_TYPE "dio_type"
+#define P_DIO_STRENGTH "dio_strength"
+#define P_DIO_POSITION "dio_position"
+#define P_DIO_WIDTH "dio_width"
+#define P_DIO_ANGLE "dio_angle"
+#define P_DIO_FEATHER "dio_feather"
+#define P_DIO_MAGNIFICATION "dio_magnification"
+#define P_DIO_BLUR "dio_blur"
+#define P_DIO_CHROMA "dio_chroma"
 
 // Vidicon params
 #define P_VID_HISTORY "history_image"
@@ -212,6 +236,9 @@
 #define P_GRIT_BLEND_MODE "grit_blend_mode"
 #define P_GRIT_SCRATCH_TYPE "grit_scratch_type"
 #define P_GRIT_DUST_SIZE "grit_dust_size"
+#define P_GRIT_HALATION "grit_halation"
+#define P_GRIT_HALATION_RADIUS "grit_halation_radius"
+#define P_GRIT_HALATION_THRESHOLD "grit_halation_threshold"
 
 // Handheld computed-output params (CPU-side, not user settings)
 

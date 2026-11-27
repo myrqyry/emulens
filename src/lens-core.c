@@ -761,6 +761,8 @@ static void *lens_create(obs_data_t *settings, obs_source_t *context) {
   GET_TECH_SAFE(filter->tech.technicolor, filter->effect, "DrawTechnicolor");
   GET_TECH_SAFE(filter->tech.wet_lens, filter->effect, "DrawWetLens");
   GET_TECH_SAFE(filter->tech.phone_wet, filter->effect, "DrawPhoneWet");
+  GET_TECH_SAFE(filter->tech.diffusion, filter->effect, "DrawDiffusion");
+  GET_TECH_SAFE(filter->tech.diopter, filter->effect, "DrawDiopter");
 
   // Validate that every strategy's tech_name resolved to a real technique.
   for (int i = 0; i < NUM_MODES; i++) {

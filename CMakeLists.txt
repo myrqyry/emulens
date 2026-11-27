@@ -44,7 +44,9 @@ set(STRATEGY_SOURCES
     src/strategies/strategy-daguerreotype.c
     src/strategies/strategy-technicolor.c
     src/strategies/strategy-wet-lens.c
-    src/strategies/strategy-phone-wet.c)
+    src/strategies/strategy-phone-wet.c
+    src/strategies/strategy-diffusion.c
+    src/strategies/strategy-diopter.c)
 add_library(${CMAKE_PROJECT_NAME} MODULE)
 # The user-facing OBS module reports the buildspec version, not the dev fallback.
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE PLUGIN_VERSION="${PROJECT_VERSION}")

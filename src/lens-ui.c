@@ -984,6 +984,22 @@ static void add_grit_properties(obs_properties_t *props) {
       props, P_GRIT_FLARES, obs_module_text("FilmFlashes"), 0.0, 1.0, 0.01);
   obs_property_set_long_description(p, obs_module_text("FilmFlashesTooltip"));
 
+  section_header(props, "Emulsion Halation");
+  p = obs_properties_add_float_slider(
+      props, P_GRIT_HALATION, obs_module_text("FilmHalation"), 0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("FilmHalationTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_GRIT_HALATION_RADIUS, obs_module_text("FilmHalationRadius"),
+      0.0, 20.0, 0.1);
+  obs_property_set_long_description(
+      p, obs_module_text("FilmHalationRadiusTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_GRIT_HALATION_THRESHOLD,
+      obs_module_text("FilmHalationThreshold"), 0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("FilmHalationThresholdTooltip"));
+
   section_header(props, "Color & Adjust");
   p = obs_properties_add_color_alpha(props, P_GRIT_COLOR,
                                      obs_module_text("GrainColor"));
@@ -1322,6 +1338,117 @@ static void add_phone_wet_properties(obs_properties_t *props) {
 // -------------------------------------------------------------------------------------------------
 // Presets
 // -------------------------------------------------------------------------------------------------
+
+static void add_diffusion_properties(obs_properties_t *props) {
+  obs_property_t *p;
+
+  section_header(props, "Filter Character");
+  obs_property_t *type = obs_properties_add_list(
+      props, P_DIFF_TYPE, obs_module_text("DiffusionType"),
+      OBS_COMBO_TYPE_LIST, OBS_COMBO_FORMAT_INT);
+  obs_property_set_long_description(type,
+                                    obs_module_text("DiffusionTypeTooltip"));
+  obs_property_list_add_int(type, obs_module_text("DiffusionTypeProMist"), 0);
+  obs_property_list_add_int(type, obs_module_text("DiffusionTypeBlackProMist"), 1);
+  obs_property_list_add_int(type, obs_module_text("DiffusionTypeSatin"), 2);
+  obs_property_list_add_int(type, obs_module_text("DiffusionTypeDigitalFX"), 3);
+  obs_property_list_add_int(type, obs_module_text("DiffusionTypeBlackNet"), 4);
+
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_STRENGTH, obs_module_text("DiffusionStrength"), 0.0, 1.0,
+      0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiffusionStrengthTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_RADIUS, obs_module_text("DiffusionRadius"), 0.0, 30.0, 0.1);
+  obs_property_set_long_description(
+      p, obs_module_text("DiffusionRadiusTooltip"));
+
+  section_header(props, "Light Response");
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_HALATION, obs_module_text("DiffusionHalation"), 0.0, 2.0,
+      0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiffusionHalationTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_HIGHLIGHT_THRESHOLD,
+      obs_module_text("DiffusionHighlightThreshold"), 0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiffusionHighlightThresholdTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_WARMTH, obs_module_text("DiffusionWarmth"), 0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiffusionWarmthTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_CONTRAST, obs_module_text("DiffusionContrast"), 0.0, 1.0,
+      0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiffusionContrastTooltip"));
+
+  section_header(props, "Black Net");
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_NET_DENSITY, obs_module_text("NetDensity"), 20.0, 240.0,
+      1.0);
+  obs_property_set_long_description(p, obs_module_text("NetDensityTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIFF_NET_ANGLE, obs_module_text("NetAngle"), -180.0, 180.0, 1.0);
+  obs_property_set_long_description(p, obs_module_text("NetAngleTooltip"));
+}
+
+// -------------------------------------------------------------------------------------------------
+// Diopter
+// -------------------------------------------------------------------------------------------------
+
+static void add_diopter_properties(obs_properties_t *props) {
+  obs_property_t *p;
+
+  section_header(props, "Glass Shape");
+  obs_property_t *type = obs_properties_add_list(
+      props, P_DIO_TYPE, obs_module_text("DiopterType"),
+      OBS_COMBO_TYPE_LIST, OBS_COMBO_FORMAT_INT);
+  obs_property_set_long_description(type, obs_module_text("DiopterTypeTooltip"));
+  obs_property_list_add_int(type, obs_module_text("DiopterTypeFull"), 0);
+  obs_property_list_add_int(type, obs_module_text("DiopterTypeSplit"), 1);
+  obs_property_list_add_int(type, obs_module_text("DiopterTypeStrip"), 2);
+  obs_property_list_add_int(type, obs_module_text("DiopterTypeLetterbox"), 3);
+
+  p = obs_properties_add_float_slider(
+      props, P_DIO_STRENGTH, obs_module_text("DiopterStrength"), 0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterStrengthTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIO_POSITION, obs_module_text("DiopterPosition"), 0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterPositionTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIO_WIDTH, obs_module_text("DiopterWidth"), 0.02, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterWidthTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIO_ANGLE, obs_module_text("DiopterAngle"), -180.0, 180.0, 1.0);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterAngleTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIO_FEATHER, obs_module_text("DiopterFeather"), 0.0, 0.25, 0.001);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterFeatherTooltip"));
+
+  section_header(props, "Optical Response");
+  p = obs_properties_add_float_slider(
+      props, P_DIO_MAGNIFICATION, obs_module_text("DiopterMagnification"),
+      0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterMagnificationTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIO_BLUR, obs_module_text("DiopterDefocus"), 0.0, 12.0, 0.1);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterDefocusTooltip"));
+  p = obs_properties_add_float_slider(
+      props, P_DIO_CHROMA, obs_module_text("DiopterChroma"), 0.0, 1.0, 0.01);
+  obs_property_set_long_description(
+      p, obs_module_text("DiopterChromaTooltip"));
+
+}
 
 static void add_preset_properties(obs_properties_t *props) {
   obs_property_t *presets =

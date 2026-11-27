@@ -40,7 +40,7 @@ const char* mode_names[NUM_MODES] = {
     "MODE_DAGUERRE",
     "MODE_TECHNICOLOR",
     "MODE_WET_LENS",
-    "MODE_PHONE_WET"
+    "MODE_PHONE_WET", "MODE_DIFFUSION", "MODE_DIOPTER"
 };
 
 // Expected technique names for each mode
@@ -61,7 +61,7 @@ const char* expected_techniques[NUM_MODES] = {
     "DrawDaguerreotype",
     "DrawTechnicolor",
     "DrawWetLens",
-    "DrawPhoneWet"
+    "DrawPhoneWet", "DrawDiffusion", "DrawDiopter"
 };
 
 int test_strategies_defined() {
@@ -115,11 +115,11 @@ int test_mode_constants() {
     printf("\n=== Testing Mode Constants ===\n");
     int failures = 0;
 
-    if (NUM_MODES != 17) {
-        printf("✗ NUM_MODES = %d, expected 17\n", NUM_MODES);
+    if (NUM_MODES != 19) {
+        printf("✗ NUM_MODES = %d, expected 19\n", NUM_MODES);
         failures++;
     } else {
-        printf("✓ NUM_MODES = 17\n");
+        printf("✓ NUM_MODES = 19\n");
     }
 
     if (MODE_VIDICON != 0) {

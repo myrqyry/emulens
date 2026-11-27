@@ -306,3 +306,8 @@ All tests pass with the changes applied:
 - **ShaderSyntaxTest**: Passed
 - **MemLeakTest**: Passed
 - **PythonIntegrationTest**: Skipped (obspython not available, expected behavior)
+
+### Recovered optical improvements
+- Film Grit: opt-in red/warm neighboring highlight scatter, with adjustable radius and threshold. Existing presets/defaults unchanged.
+- Cinema Diffusion: five optical-inspired profiles, independently thresholded scatter and detail softening, fixed rotatable net weave.
+- Diopter: four movable glass geometries, non-coincident defocus taps, zero-strength bypass. New modes append at 17 and 18; all previous mode IDs unchanged.

@@ -106,3 +106,29 @@ stationary; a dark source cannot generate bright ribbons on its own.
 Both modes have isolated OBS/OpenGL pixel tests, including refraction,
 light response, pattern stability, and alpha handling. These do not
 establish real-time performance for every live scene or GPU.
+
+## Cinema Diffusion, Diopter, and Film Halation
+
+Cinema Diffusion is an artistic optical approximation, not a calibrated
+measurement of any particular manufacturer's glass. It separately accumulates
+local detail softening and luminance-thresholded neighboring highlight scatter.
+Strength zero is an exact pass-through; radius is in source pixels; Digital
+Diffusion has no additive highlight-scatter component. Black Net rotates a
+stationary weave in lens coordinates.
+
+Diopter places a full-field, split, strip or letterbox glass region over the
+source. Rotation, position and feather define the clear/affected boundary.
+Magnification, defocus and chroma change the sampled image inside the region.
+Its multi-radius defocus kernel avoids exact cancellation on the tested
+8-pixel periodic checkerboard. It is an image-space effect, not a depth-based
+refocus operation.
+
+Film Grit's optional halation scatters alpha-weighted light from bright neighbors
+into a warm-red secondary exposure. Existing grit settings retain their prior
+values, with halation disabled. The new Halation Stock preset enables it.
+
+Linux OBS/OpenGL tests exercise these effects through actual filter settings
+and captured pixel output, including disabled identity, threshold suppression,
+clear-region preservation, radius response and no opaque-fixture alpha changes.
+Physical lens calibration, HDR, transparent-source edge behavior, sustained
+GPU timing and other graphics backends are not yet qualified.

@@ -313,6 +313,30 @@ typedef struct {
 } phone_wet_params_t;
 
 typedef struct {
+  gs_eparam_t *type;
+  gs_eparam_t *strength;
+  gs_eparam_t *radius;
+  gs_eparam_t *halation;
+  gs_eparam_t *contrast;
+  gs_eparam_t *warmth;
+  gs_eparam_t *highlight_threshold;
+  gs_eparam_t *net_density;
+  gs_eparam_t *net_angle;
+} diffusion_params_t;
+
+typedef struct {
+  gs_eparam_t *type;
+  gs_eparam_t *strength;
+  gs_eparam_t *position;
+  gs_eparam_t *width;
+  gs_eparam_t *angle;
+  gs_eparam_t *feather;
+  gs_eparam_t *magnification;
+  gs_eparam_t *blur;
+  gs_eparam_t *chroma;
+} diopter_params_t;
+
+typedef struct {
   gs_eparam_t *dust;
   gs_eparam_t *scratches;
   gs_eparam_t *noise;
@@ -326,6 +350,9 @@ typedef struct {
   gs_eparam_t *blend_mode;
   gs_eparam_t *scratch_type;
   gs_eparam_t *dust_size;
+  gs_eparam_t *halation;
+  gs_eparam_t *halation_radius;
+  gs_eparam_t *halation_threshold;
 } grit_params_t;
 
 
@@ -442,6 +469,8 @@ struct lens_data {
     gs_technique_t *technicolor;
     gs_technique_t *wet_lens;
     gs_technique_t *phone_wet;
+    gs_technique_t *diffusion;
+    gs_technique_t *diopter;
   } tech;
 
   // Union: only one mode is active at a time (enforced by the vtable/strategy
@@ -465,6 +494,8 @@ struct lens_data {
     technicolor_params_t technicolor;
     wet_lens_params_t wet_lens;
     phone_wet_params_t phone_wet;
+    diffusion_params_t diffusion;
+    diopter_params_t diopter;
   } mode_params;
 
   emulens_atomic_bool params_cached;
