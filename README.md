@@ -5,7 +5,7 @@ Use emulens as a source filter to build everything from restrained optical
 imperfections to deliberately stylized analog looks without leaving the OBS
 graphics pipeline.
 
-**Public preview — v0.5.0.** All 17 effects, including Wet Lens and Phone Wet Lens, are in this snapshot. Linux has passed isolated OBS/OpenGL tests. Windows and macOS compile/package success does not yet establish that the plugin loads and renders correctly on those platforms. See [CHANGELOG.md](CHANGELOG.md) and [release testing boundaries](docs/RELEASE_CHECKLIST.md).
+**Public preview — v0.5.0.** All 19 effects, including Cinema Diffusion, Diopter, Wet Lens and Phone Wet Lens, are in this snapshot. Linux has passed isolated OBS/OpenGL tests. Windows and macOS compile/package success does not yet establish that the plugin loads and renders correctly on those platforms. See [CHANGELOG.md](CHANGELOG.md) and [release testing boundaries](docs/RELEASE_CHECKLIST.md).
 
 ## Showcase
 
@@ -83,46 +83,19 @@ Actual OBS renders using shipped defaults and selected presets.
 
 ## Verified GitHub Actions builds
 
-The current module name is `emulens`. The November 20 rename snapshot
-[`ebc2150`](https://github.com/myrqyry/emuLens/actions/runs/44685880736)
-passed Windows and macOS packaging, static tests and formatting, but its
-Linux build failed before module compilation because the SDK bootstrap
-flag was incorrectly capitalized. The separate
-[OBS 33.0.1 build](https://github.com/myrqyry/emuLens/actions/runs/44685880558)
-passed for that snapshot. The corrected Linux path has been qualified
-locally with the pinned OBS 32.1.0 SDK: 51 native tests passed, including
-the Wet Lens and Phone Wet GPU render checks; one optional obspython
-integration case was skipped. The staged Linux module and effect resources,
-installer regression, and source-archive exclusion canaries also passed
-locally. The reconciled snapshot `887b290` subsequently passed [all five baseline jobs](https://github.com/myrqyry/emulens/actions/runs/45908543420) and the [OBS 33.0.1 compatibility build](https://github.com/myrqyry/emulens/actions/runs/45908543329).
+All eight platform/SDK jobs passed at source checkpoint `5f85e9b` in the [verified Actions run](https://github.com/myrqyry/emuLens/actions/runs/45962931025) (OBS 32.2.0 and 33.0.3; Linux x86_64, Windows x64, macOS Intel and Apple Silicon). The run produced eight downloadable test packages. Choose the package matching your installed OBS and architecture; CI artifacts are not tagged releases and may expire.
 
+The current module name is `emulens`. The shared native workflow retains
+the 56-test Linux native/GPU floor. The separate legacy CI run for the
+same source checkpoint did not pass; see [legacy CI](https://github.com/myrqyry/emulens/actions/runs/45962930485)
+and [shared CI](docs/SHARED_CI.md) for the distinct verification paths.
+The primary runtime evidence remains isolated Linux OBS/OpenGL tests.
+Windows/macOS native loading, optical parity, streaming frame times and HDR
+remain separate acceptance gates.
 
-The public [CI workflow](https://github.com/myrqyry/emuLens/actions/workflows/ci.yml)
-builds Linux x86_64, Windows x64 and macOS packages and runs formatting,
-Python checks, installer-safety tests and Linux native/GPU render tests.
-The [shared OBS plugin CI workflow](https://github.com/myrqyry/emulens/actions/workflows/obs33-compatibility.yml)
-targets OBS 32.2.0 and 33.0.3 on Linux x86-64, Windows x64 and native Intel/Apple Silicon macOS.
-It produces versioned test archives and checksums; Linux retains the real GPU/native test floor.
-The original OBS 32.1.0 baseline remains intact during qualification. See [shared CI](docs/SHARED_CI.md).
-
-For the public snapshot `354c87a` (November 9, 2026), both
-workflows passed:
-
-- [Main CI: all five jobs passed](https://github.com/myrqyry/emuLens/actions/runs/42732888596).
-  Downloadable artifacts: `emulensfx-linux-obs32`,
-  `emulensfx-windows-obs32` and `emulensfx-macos-obs32`.
-- [OBS 33.0.1 compatibility: passed](https://github.com/myrqyry/emuLens/actions/runs/42732888818).
-
-The packages contain the platform-specific module/bundle,
-`emulens.effect` and all 61 presets; the Linux package also includes
-localization. The downloaded source archive passed the private-file
-exclusion checks. GitHub retains workflow artifacts for a limited time.
-There is no tagged or signed GitHub Release yet.
-
-**Compatibility:** OBS 32.1.0+ is required, but a module compiled
-against a newer libobs SDK may not load in an older OBS installation.
-Windows and macOS packaging success does not establish runtime loading
-or visual correctness on those platforms.
+**Compatibility:** OBS 32.1.0+ is required for the legacy baseline, but
+a module compiled against a newer SDK may not load in an older OBS installation.
+Use the version-specific archive, not a renamed older module.
 
 ## Installation
 
